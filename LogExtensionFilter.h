@@ -1,16 +1,18 @@
 /*************************************************************************
-                     LogFilter  -  description
+                     LogExtensionFilter  -  description
                              -------------------
     début                : 14/01/2020
     copyright            : (C) 2020 par GRAVEY Thibaut & CHEN Gong
     e-mail               : $EMAIL$
 *************************************************************************/
 
-//---------- Interface de la classe <LogFilter> (fichier LogFilter.h) ----------------
-#if ! defined ( LOGFILTER_H )
-#define LOGFILTER_H
+//---------- Interface de la classe <LogExtensionFilter> (fichier LogExtensionFilter.h) ----------------
+#if ! defined ( LOGEXTENSIONFILTER_H )
+#define LOGEXTENSIONFILTER_H
 
 //--------------------------------------------------- Interfaces utilisées
+#include <vector>
+#include "LogFilter.h"
 #include "LogElement.h"
 
 //------------------------------------------------------------- Constantes
@@ -18,12 +20,12 @@
 //------------------------------------------------------------------ Types
 
 //------------------------------------------------------------------------
-// Rôle de la classe <LogFilter>
+// Rôle de la classe <LogExtensionFilter>
 //
 //
 //------------------------------------------------------------------------
 
-class LogFilter
+class LogExtensionFilter : public LogFilter
 {
 //----------------------------------------------------------------- PUBLIC
 
@@ -35,15 +37,26 @@ public:
     // Contrat :
     //
 
-    virtual bool Authorize(LogElement & le) const = 0;
-    // Mode d'emploi:
+    bool Authorize(LogElement & le) const;
+    // Mode d'emploi :
     //
     // Contrat :
     //
 
+    void AddExtension(string ext);
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
+    bool RemoveExtension(string ext);
+    // Mode d'emploi
+    //
+    // Contrat :
+    //
 
 //------------------------------------------------- Surcharge d'opérateurs
-    virtual LogFilter & operator = ( const LogFilter & unLogFilter );
+    LogExtensionFilter & operator = (const LogExtensionFilter & unLogExtensionFilter );
     // Mode d'emploi :
     //
     // Contrat :
@@ -51,19 +64,19 @@ public:
 
 
 //-------------------------------------------- Constructeurs - destructeur
-    LogFilter ( const LogFilter & unLogFilter );
+    LogExtensionFilter (const LogExtensionFilter & unLogExtensionFilter );
     // Mode d'emploi (constructeur de copie) :
     //
     // Contrat :
     //
 
-    LogFilter ( );
+    LogExtensionFilter (vector<string> & ext);
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    virtual ~LogFilter ( );
+    virtual ~LogExtensionFilter ( );
     // Mode d'emploi :
     //
     // Contrat :
@@ -76,9 +89,11 @@ protected:
 
 //----------------------------------------------------- Attributs protégés
 
+    vector<string> extensions;
+
 };
 
-//-------------------------------- Autres définitions dépendantes de <LogFilter>
+//-------------------------------- Autres définitions dépendantes de <LogExtensionFilter>
 
-#endif // LOGFILTER_H
+#endif // TIMEFILTER_H
 

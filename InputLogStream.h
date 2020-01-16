@@ -15,7 +15,6 @@
 #include <fstream>
 #include <vector>
 #include "LogElement.h"
-#include "LogFilter.h"
 
 //------------------------------------------------------------- Constantes
 

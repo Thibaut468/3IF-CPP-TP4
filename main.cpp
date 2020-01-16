@@ -17,6 +17,9 @@ using namespace std;
 //------------------------------------------------------ Include personnel
 #include "InputLogStream.h"
 #include "LogElement.h"
+#include "LogFilter.h"
+#include "LogTimeFilter.h"
+#include "LogExtensionFilter.h"
 
 //------------------------------------------------------------- Constantes
 
@@ -42,7 +45,10 @@ int main(int argc, char ** argv)
     bool optionG(false);
     bool optionE(false);
     bool optionT(false);
+    int timeFilter(4);
 
+    LogTimeFilter * ltf = nullptr;
+    LogExtensionFilter * lef = nullptr;
     int cpt(0);
 
     InputLogStream flux("../anonyme.log","http://intranet-if.insa-lyon.fr");
@@ -60,8 +66,24 @@ int main(int argc, char ** argv)
         return EXIT_FAILURE;
     }
 
+    cout << "Mise en place des filtres" << endl;
+
     //Mise en place des filtres
-    vector<LogFilter> filters;
+    vector<LogFilter*> filters;
+    vector<string> extensionsFilter;
+    extensionsFilter.emplace_back(".css");
+    extensionsFilter.emplace_back(".js");
+    extensionsFilter.emplace_back(".ico");
+    extensionsFilter.emplace_back(".jpg");
+    extensionsFilter.emplace_back(".png");
+    extensionsFilter.emplace_back(".gif");
+    extensionsFilter.emplace_back(".bmp");
+
+    ltf = new LogTimeFilter(timeFilter,1);
+    lef = new LogExtensionFilter(extensionsFilter);
+
+    filters.emplace_back(ltf);
+    filters.emplace_back(lef);
 
     //Récupération des données logs et traitement
     while(flux)
@@ -70,23 +92,30 @@ int main(int argc, char ** argv)
         LogElement le;
         if (flux >> le)
         {
-            cout << le << endl;
-            cpt++;
-
-            for(vector<LogFilter>::iterator it=filters.begin(); it!=filters.end(); ++it)
+            for(vector<LogFilter*>::iterator it=filters.begin(); it!=filters.end(); ++it)
             {
-                //Mettre a jour valid a false si besoin
+                valid = (**it).Authorize(le);
+
+                if(!valid)
+                {
+                    break;
+                }
             }
 
             if(valid)
             {
-                //AJOUTER DANS LES STATS
+                cout << le << endl;
+                cpt++;
             }
         }
     }
 
     //Affichage des résultats en fonction des options
-    cout << "NbLignes traitées : " << cpt << endl;
+    cout << "NbLignes acceptées : " << cpt << endl;
+
+    //Destruction des espaces mémoires
+    delete ltf;
+    delete lef;
 
     return EXIT_SUCCESS;
 
