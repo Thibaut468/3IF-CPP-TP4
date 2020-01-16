@@ -1,8 +1,8 @@
 /*************************************************************************
-                           LogFilter  -  description
+                       LogFilter  -  description
                              -------------------
-    début                : $DATE$
-    copyright            : (C) $YEAR$ par $AUTHOR$
+    début                : 14/01/2020
+    copyright            : (C) 2020 par GRAVEY Thibaut & CHEN Gong
     e-mail               : $EMAIL$
 *************************************************************************/
 
@@ -34,19 +34,11 @@ LogFilter & LogFilter::operator = ( const LogFilter & unLogFilter )
 // Algorithme :
 //
 {
+    return *this;
 } //----- Fin de operator =
 
 
 //-------------------------------------------- Constructeurs - destructeur
-LogFilter::LogFilter ( const LogFilter & unLogFilter )
-// Algorithme :
-//
-{
-#ifdef MAP
-    cout << "Appel au constructeur de copie de <LogFilter>" << endl;
-#endif
-} //----- Fin de LogFilter (constructeur de copie)
-
 
 LogFilter::LogFilter ( )
 // Algorithme :
@@ -71,4 +63,13 @@ LogFilter::~LogFilter ( )
 //------------------------------------------------------------------ PRIVE
 
 //----------------------------------------------------- Méthodes protégées
+
+LogFilter::LogFilter ( const LogFilter & unLogFilter )
+// Algorithme :
+//
+{
+#ifdef MAP
+    cout << "Appel au constructeur de copie de <LogFilter>" << endl;
+#endif
+} //----- Fin de LogFilter (constructeur de copie)
 

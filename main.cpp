@@ -15,7 +15,8 @@ using namespace std;
 #include <iostream>
 
 //------------------------------------------------------ Include personnel
-#include "main.h"
+#include "InputLogStream.h"
+#include "LogElement.h"
 
 //------------------------------------------------------------- Constantes
 
@@ -28,30 +29,65 @@ using namespace std;
 //{
 //} //----- Fin de Méthode
 
+bool ErrorHandler(int argc, char ** argv, bool & optionG, bool & optionE, bool & optionT)
+{
+    return true;
+}
+
 int main(int argc, char ** argv)
 // Algorithme :
 //
 {
-    InputLogStream flux("/tmp/anonyme.log","http://intranet-if.insa-lyon.fr");
+    //Mise en place des variables
+    bool optionG(false);
+    bool optionE(false);
+    bool optionT(false);
 
     int cpt(0);
 
+    InputLogStream flux("../anonyme.log","http://intranet-if.insa-lyon.fr");
+
+    //Vérification des erreurs d'entrées
+    if(!ErrorHandler(argc, argv, optionG, optionE, optionT))
+    {
+         return EXIT_FAILURE;
+    }
+
+    //Vérification des erreurs du flux
     if(!flux.is_open())
     {
         cerr << "An error occured while opening the file." << endl;
-        return -1;
+        return EXIT_FAILURE;
     }
 
+    //Mise en place des filtres
+    vector<LogFilter> filters;
+
+    //Récupération des données logs et traitement
     while(flux)
     {
+        bool valid(true);
         LogElement le;
-        flux>>le;
-        cout << le << endl;
-        cpt++;
+        if (flux >> le)
+        {
+            cout << le << endl;
+            cpt++;
+
+            for(vector<LogFilter>::iterator it=filters.begin(); it!=filters.end(); ++it)
+            {
+                //Mettre a jour valid a false si besoin
+            }
+
+            if(valid)
+            {
+                //AJOUTER DANS LES STATS
+            }
+        }
     }
 
+    //Affichage des résultats en fonction des options
     cout << "NbLignes traitées : " << cpt << endl;
 
-
+    return EXIT_SUCCESS;
 
 } //----- Fin de main

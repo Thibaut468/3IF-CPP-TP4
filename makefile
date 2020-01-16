@@ -3,7 +3,7 @@ CFLAGS=-g -Wall -Werror -ansi -pedantic -std=c++11
 DFLAGS=
 
 MAIN=exec
-SRCS= Trajet.cpp TrajetSimple.cpp TrajetCompose.cpp ListeTrajets.cpp Catalogue.cpp Mapper.cpp
+SRCS= main.cpp InputLogStream.cpp LogElement.cpp LogFilter.cpp
 OBJS=$(SRCS:.c=.o)
 
 $(MAIN): $(OBJS)

@@ -41,6 +41,27 @@ LogElement & LogElement::operator = ( const LogElement & unLogElement )
 // Algorithme :
 //
 {
+    if(this != &unLogElement)
+    {
+        infos.IP=unLogElement.infos.IP;
+        infos.userLogName=unLogElement.infos.userLogName;
+        infos.authentificatedUser=unLogElement.infos.authentificatedUser;
+        infos.day=unLogElement.infos.day;
+        infos.month=unLogElement.infos.month;
+        infos.year=unLogElement.infos.year;
+        infos.hour=unLogElement.infos.hour;
+        infos.minute=unLogElement.infos.minute;
+        infos.second=unLogElement.infos.second;
+        infos.GMT=unLogElement.infos.GMT;
+        infos.action=unLogElement.infos.action;
+        infos.URL=unLogElement.infos.URL;
+        infos.protocol=unLogElement.infos.protocol;
+        infos.statusCode=unLogElement.infos.statusCode;
+        infos.dataQuantity=unLogElement.infos.dataQuantity;
+        infos.referer=unLogElement.infos.referer;
+        infos.idNavigateur=unLogElement.infos.idNavigateur;
+    }
+    return *this;
 } //----- Fin de operator =
 
 ostream & operator << (ostream & os, LogElement & el)
@@ -48,9 +69,36 @@ ostream & operator << (ostream & os, LogElement & el)
 //
 {
     os << el.GetInfos().IP << " " << el.GetInfos().userLogName << " " << el.GetInfos().authentificatedUser << " ";
-    os << "[" << el.GetInfos().date << "] " << el.GetInfos().request << "\" " << el.GetInfos().statusCode << " ";
-    os << el.GetInfos().dataQuantity << " \"" << el.GetInfos().referer << "\" \"" <<  el.GetInfos().idNavigateur;
-    os << "\"";
+    os << "[";
+
+    if(el.GetInfos().day<=9)
+    {
+        os << "0";
+    }
+    os << el.GetInfos().day << "/" << el.GetInfos().month << "/" << el.GetInfos().year << ":";
+
+    if(el.GetInfos().hour<=9)
+    {
+        os << "0";
+    }
+    os << el.GetInfos().hour << ":";
+
+    if(el.GetInfos().minute<=9)
+    {
+        os << "0";
+    }
+    os << el.GetInfos().minute << ":";
+
+    if(el.GetInfos().second<=9)
+    {
+        os << "0";
+    }
+    os << el.GetInfos().second << " ";
+
+    os << el.GetInfos().GMT << "] ";
+    os << "\"" << el.GetInfos().action << " " << el.GetInfos().URL << " " << el.GetInfos().protocol << "\" ";
+    os << el.GetInfos().statusCode << " " << el.GetInfos().dataQuantity;
+    os << " \"" << el.GetInfos().referer << "\" \"" <<  el.GetInfos().idNavigateur << "\"";
 
     return os;
 } //----- Fin de operator <<

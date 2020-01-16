@@ -49,77 +49,85 @@ InputLogStream & operator >> (InputLogStream & ils, LogElement & le)
 {
     string tampon;
 
-    if(ils)
-    {
+    try {
         //IP
-        getline(ils,le.GetInfos().IP,' ');
+        getline(ils, tampon, ' ');
+        le.GetInfos().IP = tampon;
 
         //userLogName
-        getline(ils,le.GetInfos().userLogName,' ');
+        getline(ils, le.GetInfos().userLogName, ' ');
 
         //authentificatedUser
-        getline(ils,le.GetInfos().authentificatedUser,' ');
+        getline(ils, le.GetInfos().authentificatedUser, ' ');
 
         //date
-        getline(ils,tampon,']');
-        tampon.erase(0,1);
-        le.GetInfos().date=tampon;
+        getline(ils, tampon, ']');
+        tampon.erase(0, 1);
+        le.GetInfos().day = stoi(tampon.substr(0, 2));
+        le.GetInfos().month = tampon.substr(3, 3);
+        le.GetInfos().year = stoi(tampon.substr(7, 4));
+        le.GetInfos().hour = stoi(tampon.substr(12, 2));
+        le.GetInfos().minute = stoi(tampon.substr(15, 2));
+        le.GetInfos().second = stoi(tampon.substr(18, 2));
+        le.GetInfos().GMT = tampon.substr(21, 5);
 
-        ils.seekg(2,ios_base::cur);
+        ils.seekg(2, ios_base::cur);
 
-        //request
+        //action
+        getline(ils, tampon, ' ');
+        le.GetInfos().action = tampon;
+
+        //URL
+        getline(ils, tampon, ' ');
+        le.GetInfos().URL = tampon;
+
+        //protocol
         getline(ils, tampon, '"');
-        le.GetInfos().request=tampon;
+        le.GetInfos().protocol = tampon;
 
-        ils.seekg(1,ios_base::cur);
+        ils.seekg(1, ios_base::cur);
 
         //statusCode
-        try
-        {
+        try {
             getline(ils, tampon, ' ');
-            le.GetInfos().statusCode=stoi(tampon);
+            le.GetInfos().statusCode = stoi(tampon);
 
         }
-        catch (exception e)
-        {
-            le.GetInfos().statusCode=0;
+        catch (exception e) {
+            le.GetInfos().statusCode = 0;
         }
 
         //dataQuantity
-        try
-        {
+        try {
             getline(ils, tampon, ' ');
             le.GetInfos().dataQuantity = stoi(tampon);
         }
-        catch (exception e)
-        {
-            le.GetInfos().dataQuantity=0;
+        catch (exception e) {
+            le.GetInfos().dataQuantity = 0;
         }
 
         //referer
         getline(ils, tampon, ' ');
-        tampon.erase(0,1);
-        tampon.erase(tampon.length()-1);
+        tampon.erase(0, 1);
+        tampon.erase(tampon.length() - 1);
 
         size_t pos = tampon.find(ils.GetServerUrl());
-        if(pos!=string::npos)
-        {
-            tampon.erase(pos,ils.GetServerUrl().length());
+        if (pos != string::npos) {
+            tampon.erase(pos, ils.GetServerUrl().length());
         }
-        le.GetInfos().referer=tampon;
+        le.GetInfos().referer = tampon;
 
-        //idNaviguateur
-        getline(ils, tampon, '\n');
-        tampon.erase(0,1);
-        tampon.erase(tampon.length()-1);
-        le.GetInfos().idNavigateur=tampon;
+        //idNavigateur
+        getline(ils, tampon);
+        tampon.erase(0, 1);
+        tampon.erase(tampon.length() - 1);
+        le.GetInfos().idNavigateur = tampon;
 
     }
-    else
+    catch (exception e)
     {
-        cerr << "End of file. Not enough data to create an other LogElement.";
+        //Catch EOF OR FAIL
     }
-
 
     return ils;
 

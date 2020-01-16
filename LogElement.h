@@ -21,15 +21,23 @@ struct Informations
     string IP;
     string userLogName;
     string authentificatedUser;
-    string date;
-    string request;
+    int day;
+    string month;
+    int year;
+    int hour;
+    int minute;
+    int second;
+    string GMT;
+    string action;
+    string URL;
+    string protocol;
     int statusCode;
     int dataQuantity;
     string referer;
     string idNavigateur;
 
-    Informations(string ip="",string uln="",string au="",string da="",string req="",int code = 0, int qty = 0, string ref = "", string id="")
-        : IP(ip), userLogName(uln), authentificatedUser(au), date(da), request(req), statusCode(code), dataQuantity(qty), referer(ref), idNavigateur(id) {}
+    Informations(string ip="",string uln="",string au="",int j = 0, string mo="", int y = 0, int h = 0, int m = 0, int s = 0, string dec="", string act="", string u="", string p="",int code = 0, int qty = 0, string ref = "", string id="")
+        : IP(ip), userLogName(uln), authentificatedUser(au), day(j), month(mo), year(y), hour(h), minute(m), second(s), GMT(dec), action(act), URL(u), protocol(p), statusCode(code), dataQuantity(qty), referer(ref), idNavigateur(id) {}
 };
 
 //------------------------------------------------------------------------

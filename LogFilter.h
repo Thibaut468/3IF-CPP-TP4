@@ -1,8 +1,8 @@
 /*************************************************************************
-                           LogFilter  -  description
+                     LogFilter  -  description
                              -------------------
-    début                : $DATE$
-    copyright            : (C) $YEAR$ par $AUTHOR$
+    début                : 14/01/2020
+    copyright            : (C) 2020 par GRAVEY Thibaut & CHEN Gong
     e-mail               : $EMAIL$
 *************************************************************************/
 
@@ -44,12 +44,6 @@ public:
 
 
 //-------------------------------------------- Constructeurs - destructeur
-    LogFilter ( const LogFilter & unLogFilter );
-    // Mode d'emploi (constructeur de copie) :
-    //
-    // Contrat :
-    //
-
     LogFilter ( );
     // Mode d'emploi :
     //
@@ -66,6 +60,12 @@ public:
 
 protected:
 //----------------------------------------------------- Méthodes protégées
+
+    LogFilter ( const LogFilter & unLogFilter );
+    // Mode d'emploi (constructeur de copie) :
+    //
+    // Contrat :
+    //
 
 //----------------------------------------------------- Attributs protégés
 
