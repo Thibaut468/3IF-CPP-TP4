@@ -1,9 +1,9 @@
 CC=g++
 CFLAGS=-g -Wall -Werror -ansi -pedantic -std=c++11
-DFLAGS= -DMAP
+DFLAGS=
 
 MAIN=exec
-SRCS= main.cpp InputLogStream.cpp LogElement.cpp LogFilter.cpp LogTimeFilter.cpp LogExtensionFilter.cpp 
+SRCS= main.cpp InputLogStream.cpp LogElement.cpp LogFilter.cpp States.cpp GraphGenerateur.cpp
 OBJS=$(SRCS:.c=.o)
 
 $(MAIN): $(OBJS)
