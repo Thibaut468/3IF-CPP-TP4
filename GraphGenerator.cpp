@@ -6,7 +6,7 @@
     e-mail               : $EMAIL$
 *************************************************************************/
 
-//---------- Réalisation de la classe <GraphGenerateur> (fichier GraphGenerateur.cpp) ------------
+//---------- Réalisation de la classe <GraphGenerator> (fichier GraphGenerator.cpp) ------------
 
 //---------------------------------------------------------------- INCLUDE
 
@@ -16,23 +16,23 @@
 using namespace std;
 
 //------------------------------------------------------ Include personnel
-#include "GraphGenerateur.h"
+#include "GraphGenerator.h"
 
 //------------------------------------------------------------- Constantes
 
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-// type GraphGenerateur::Méthode ( liste des paramètres )
+// type GraphGenerator::Méthode ( liste des paramètres )
 // Algorithme :
 //
 //{
 //} //----- Fin de Méthode
 
-void GraphGenerateur::Generer(Map_Cibles_Pairs & unMapCibles){
+void GraphGenerator::Generer(Map_Cibles_Pairs & unMapCibles, string & dotName){
 
     ofstream file;
-    file.open("Cibles-Referer.dot");
+    file.open(dotName);
     file<<"digraph {"<<endl;
     Map_Cibles_Pairs::iterator itC;
     Map_Referers_NbHit::iterator itR;
@@ -63,7 +63,7 @@ void GraphGenerateur::Generer(Map_Cibles_Pairs & unMapCibles){
 
 
 //------------------------------------------------- Surcharge d'opérateurs
-//GraphGenerateur & GraphGenerateur::operator = ( const GraphGenerateur & unGraphGenerateur )
+//GraphGenerator & GraphGenerator::operator = ( const GraphGenerator & unGraphGenerateur )
 // Algorithme :
 //
 //{
@@ -71,34 +71,33 @@ void GraphGenerateur::Generer(Map_Cibles_Pairs & unMapCibles){
 
 
 //-------------------------------------------- Constructeurs - destructeur
-GraphGenerateur::GraphGenerateur ( const GraphGenerateur & unGraphGenerateur )
+GraphGenerator::GraphGenerator (const GraphGenerator & unGraphGenerateur )
 // Algorithme :
 //
 {
 #ifdef MAP
-    cout << "Appel au constructeur de copie de <GraphGenerateur>" << endl;
+    cout << "Appel au constructeur de copie de <GraphGenerator>" << endl;
 #endif
-} //----- Fin de GraphGenerateur (constructeur de copie)
+} //----- Fin de GraphGenerator (constructeur de copie)
 
 
-GraphGenerateur::GraphGenerateur ( )
+GraphGenerator::GraphGenerator ( )
 // Algorithme :
 //
 {
 #ifdef MAP
-    cout << "Appel au constructeur de <GraphGenerateur>" << endl;
+    cout << "Appel au constructeur de <GraphGenerator>" << endl;
 #endif
-} //----- Fin de GraphGenerateur
+} //----- Fin de GraphGenerator
 
-GraphGenerateur::~GraphGenerateur ( )
+GraphGenerator::~GraphGenerator ( )
 // Algorithme :
 //
 {
 #ifdef MAP
-    cout << "Appel au destructeur de <GraphGenerateur>" << endl;
+    cout << "Appel au destructeur de <GraphGenerator>" << endl;
 #endif
-} //----- Fin de ~GraphGenerateur
-
+} //----- Fin de GraphGenerator
 
 //------------------------------------------------------------------ PRIVE
 

@@ -6,23 +6,23 @@
     e-mail               : $EMAIL$
 *************************************************************************/
 
-//---------- Interface de la classe <GraphGenerateur> (fichier GraphGenerateur.h) ----------------
+//---------- Interface de la classe <GraphGenerator> (fichier GraphGenerator.h) ----------------
 #if ! defined ( GraphGenerateur_H )
 #define GraphGenerateur_H
 
 //--------------------------------------------------- Interfaces utilisées
-#include "States.h"
+#include "Stats.h"
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
 
 //------------------------------------------------------------------------
-// Rôle de la classe <GraphGenerateur>
+// Rôle de la classe <GraphGenerator>
 //
 //
 //------------------------------------------------------------------------
 
-class GraphGenerateur
+class GraphGenerator
 {
 //----------------------------------------------------------------- PUBLIC
 
@@ -34,29 +34,29 @@ public:
     // Contrat :
     //
 
-    void Generer(Map_Cibles_Pairs & unMapCibles);
+    void Generer(Map_Cibles_Pairs & unMapCibles, string & dotName);
 
 //------------------------------------------------- Surcharge d'opérateurs
-//    GraphGenerateur & operator = ( const GraphGenerateur & unGraphGenerateur );
+//    GraphGenerator & operator = ( const GraphGenerator & unGraphGenerateur );
     // Mode d'emploi :
     //
     // Contrat :
     //
 
 //-------------------------------------------- Constructeurs - destructeur
-    GraphGenerateur ( const GraphGenerateur & unGraphGenerateur );
+    GraphGenerator (const GraphGenerator & unGraphGenerateur );
     // Mode d'emploi (constructeur de copie) :
     //
     // Contrat :
     //
 
-    GraphGenerateur ( );
+    GraphGenerator ( );
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    virtual ~GraphGenerateur ( );
+    virtual ~GraphGenerator ( );
     // Mode d'emploi :
     //
     // Contrat :
@@ -71,6 +71,6 @@ protected:
 vector<string> Nodes;
 };
 
-//-------------------------------- Autres définitions dépendantes de <GraphGenerateur>
+//-------------------------------- Autres définitions dépendantes de <GraphGenerator>
 
 #endif // GraphGenerateur_H

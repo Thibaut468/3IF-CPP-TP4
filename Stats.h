@@ -6,7 +6,7 @@
     e-mail               : $EMAIL$
 *************************************************************************/
 
-//---------- Interface de la classe <States> (fichier States.h) ----------------
+//---------- Interface de la classe <Stats> (fichier Stats.h) ----------------
 #if ! defined ( States_H )
 #define States_H
 
@@ -37,12 +37,12 @@ typedef vector<string> CiblesTop10;
 
 
 //------------------------------------------------------------------------
-// Rôle de la classe <States>
+// Rôle de la classe <Stats>
 //
 //
 //------------------------------------------------------------------------
 
-class States
+class Stats
 {
 //----------------------------------------------------------------- PUBLIC
 
@@ -53,18 +53,18 @@ public:
     //
     // Contrat :
     //
-    void AjouterInfo (Informations info);
+    void AjouterInfo (Informations & info);
     CiblesTop10 FindTop10();
     void AffichageTop10();
 
 //------------------------------------------------- Surcharge d'opérateurs
-    //States & operator = ( const States & unStates );
+    //Stats & operator = ( const Stats & unStates );
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    friend ostream & operator << (ostream & os, States & unState);
+    friend ostream & operator << (ostream & os, Stats & unState);
     // Mode d'emploi :
     //
     // Contrat :
@@ -76,19 +76,19 @@ public:
     //
 
 //-------------------------------------------- Constructeurs - destructeur
-    States ( const States & unStates );
+    Stats (const Stats & unStates );
     // Mode d'emploi (constructeur de copie) :
     //
     // Contrat :
     //
 
-    States ( );
+    Stats ( );
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    virtual ~States ( );
+    virtual ~Stats ( );
     // Mode d'emploi :
     //
     // Contrat :
@@ -103,6 +103,6 @@ protected:
 Map_Cibles_Pairs MapCibles;
 
 };
-//-------------------------------- Autres définitions dépendantes de <States>
+//-------------------------------- Autres définitions dépendantes de <Stats>
 
 #endif // States_H

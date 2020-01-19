@@ -6,7 +6,7 @@
     e-mail               : $EMAIL$
 *************************************************************************/
 
-//---------- Réalisation de la classe <States> (fichier States.cpp) ------------
+//---------- Réalisation de la classe <Stats> (fichier Stats.cpp) ------------
 
 //---------------------------------------------------------------- INCLUDE
 
@@ -14,25 +14,25 @@
 using namespace std;
 #include <iostream>
 //------------------------------------------------------ Include personnel
-#include "States.h"
+#include "Stats.h"
 
 //------------------------------------------------------------- Constantes
 
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-// type States::Méthode ( liste des paramètres )
+// type Stats::Méthode ( liste des paramètres )
 // Algorithme :
 //
 //{
 //} //----- Fin de Méthode
 
-void States::AjouterInfo (Informations info){
+void Stats::AjouterInfo (Informations & info){
     MapCibles[info.URL].MapReferers[info.referer]++;
     MapCibles[info.URL].NbHitTotal++;
 }
 
-CiblesTop10 States::FindTop10()
+CiblesTop10 Stats::FindTop10()
 // Algorithme : on cherche le NbHitTotal max dans le map MapCibles,
 //  on l'enregistre dans un tableau, ensuite on remplace le NbHitTotal par 0,
 // a la fin de l'execution, on remet les valeurs  de NbHitTotal
@@ -58,11 +58,11 @@ CiblesTop10 States::FindTop10()
     return myTop10;
 }
 
-void States::AffichageTop10(){
+void Stats::AffichageTop10(){
     CiblesTop10 desCiblesTop10 = FindTop10();
     int n = 0;
 
-    cout<<"Top 10 cibles consultes par ordre decoissant"<<endl;
+    cout<<"Top 10 cibles consultes par ordre decroissant"<<endl;
     for(int i = 0; i < 10; i++){
         n++;
         cout<<n<<"° : \" "<<desCiblesTop10[i]<<" \" "<<endl;
@@ -70,13 +70,13 @@ void States::AffichageTop10(){
 }
 
 //------------------------------------------------- Surcharge d'opérateurs
-//States & States::operator = ( const States & unStates )
+//Stats & Stats::operator = ( const Stats & unStates )
 // Algorithme :
 //
 //{
 //} //----- Fin de operator =
 
-ostream & operator << (ostream & os, States & unState)
+ostream & operator << (ostream & os, Stats & unState)
 // Algorithme :
 //
 {
@@ -98,40 +98,39 @@ ostream & operator << (ostream & os, States & unState)
     return os;
 } //----- Fin de operator <<
 
-Map_Cibles_Pairs & States::GetMapCibles(){
+Map_Cibles_Pairs & Stats::GetMapCibles(){
     return MapCibles;
 }
 
 //-------------------------------------------- Constructeurs - destructeur
-States::States ( const States & unStates )
+Stats::Stats (const Stats & unStates )
 // Algorithme :
 //
 {
 #ifdef MAP
-    cout << "Appel au constructeur de copie de <States>" << endl;
+    cout << "Appel au constructeur de copie de <Stats>" << endl;
 #endif
-} //----- Fin de States (constructeur de copie)
+} //----- Fin de Stats (constructeur de copie)
 
 
-States::States ( )
+Stats::Stats ( )
 // Algorithme :
 //
 {
 #ifdef MAP
-    cout << "Appel au constructeur de <States>" << endl;
+    cout << "Appel au constructeur de <Stats>" << endl;
 #endif
-} //----- Fin de States
+} //----- Fin de Stats
 
 
-States::~States ( )
+Stats::~Stats ( )
 // Algorithme :
 //
 {
 #ifdef MAP
-    cout << "Appel au destructeur de <States>" << endl;
+    cout << "Appel au destructeur de <Stats>" << endl;
 #endif
-} //----- Fin de ~States
-
+} //----- Fin de Stats
 
 //------------------------------------------------------------------ PRIVE
 
