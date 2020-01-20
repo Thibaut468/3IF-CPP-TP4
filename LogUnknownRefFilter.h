@@ -1,30 +1,31 @@
 /*************************************************************************
-                     LogTimeFilter  -  description
+                     LogUnknownRefFilter  -  description
                              -------------------
     début                : 14/01/2020
     copyright            : (C) 2020 par GRAVEY Thibaut & CHEN Gong
     e-mail               : $EMAIL$
 *************************************************************************/
 
-//---------- Interface de la classe <LogTimeFilter> (fichier LogTimeFilter.h) ----------------
-#if ! defined ( LOGTIMEFILTER_H )
-#define LOGTIMEFILTER_H
+//---------- Interface de la classe <LogUnknownRefFilter> (fichier LogUnknownRefFilter.h) ----------------
+#if ! defined ( LOGUNKNOWNREFFILTER_H )
+#define LOGUNKNOWNREFFILTER_H
 
 //--------------------------------------------------- Interfaces utilisées
 #include "LogFilter.h"
 #include "LogElement.h"
+#include <vector>
 
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
 
 //------------------------------------------------------------------------
-// Rôle de la classe <LogTimeFilter>
+// Rôle de la classe <LogUnknownRefFilter>
 //
 //
 //------------------------------------------------------------------------
 
-class LogTimeFilter : public LogFilter
+class LogUnknownRefFilter : public LogFilter
 {
 //----------------------------------------------------------------- PUBLIC
 
@@ -32,7 +33,7 @@ public:
 //----------------------------------------------------- Méthodes publiques
     // type Méthode ( liste des paramètres );
     // Mode d'emploi :
-    //LogTimeFilter.h
+    //LogUnknownRefFilter.h
     // Contrat :
     //
 
@@ -42,8 +43,20 @@ public:
     // Contrat :
     //
 
+    void AddName(string name);
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
+    bool RemoveName(string name);
+    // Mode d'emploi
+    //
+    // Contrat :
+    //
+
 //------------------------------------------------- Surcharge d'opérateurs
-    LogTimeFilter & operator = (const LogTimeFilter & unLogTimeFilter );
+    LogUnknownRefFilter & operator = (const LogUnknownRefFilter & unLogUnknownRefFilter );
     // Mode d'emploi :
     //
     // Contrat :
@@ -52,19 +65,19 @@ public:
 
 //-------------------------------------------- Constructeurs - destructeur
 
-    LogTimeFilter (const LogTimeFilter & unLogTimeFilter );
+    LogUnknownRefFilter (const LogUnknownRefFilter & unLogUnknownRefFilter );
     // Mode d'emploi (constructeur de copie) :
     //
     // Contrat :
     //
 
-    LogTimeFilter (int t = 0, int inter = 0);
+    LogUnknownRefFilter (vector<string> & name);
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    virtual ~LogTimeFilter ( );
+    virtual ~LogUnknownRefFilter ( );
     // Mode d'emploi :
     //
     // Contrat :
@@ -77,12 +90,11 @@ protected:
 
 //----------------------------------------------------- Attributs protégés
 
-    int time;
-    int interval;
+    vector<string> unknownName;
 
 };
 
-//-------------------------------- Autres définitions dépendantes de <LogTimeFilter>
+//-------------------------------- Autres définitions dépendantes de <LogUnknownRefFilter>
 
 #endif // TIMEFILTER_H
 

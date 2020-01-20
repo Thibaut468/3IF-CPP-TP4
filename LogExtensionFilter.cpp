@@ -33,12 +33,20 @@ bool LogExtensionFilter::Authorize(LogElement &le) const
 // Algorithme
 //
 {
-    if(le.GetInfos().URL.find_last_of('.') == string::npos) //Pas d'extension
+    bool cible(true);
+    bool ref(true);
+
+    if(le.GetInfos().URL.find_last_of('.') != string::npos) //Il y a une extension sur la cible
     {
-        return true;
+        cible = find(extensions.begin(),extensions.end(),le.GetInfos().URL.substr(le.GetInfos().URL.find_last_of('.')))==extensions.end();
     }
 
-    return (find(extensions.begin(),extensions.end(),le.GetInfos().URL.substr(le.GetInfos().URL.find_last_of('.')))==extensions.end());
+    if(le.GetInfos().URL.find_last_of('.') != string::npos) //Il y a une extension sur la ref
+    {
+        ref = find(extensions.begin(),extensions.end(),le.GetInfos().referer.substr(le.GetInfos().URL.find_last_of('.')))==extensions.end();
+    }
+
+    return (cible && ref);
 } // ---- Fin de Authorize
 
 void LogExtensionFilter::AddExtension(string ext)
