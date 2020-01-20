@@ -61,6 +61,8 @@ static string  StatusMessage[ArgStatus::ARGS_STATUS_SIZE] = {
 static string SERVER_URL = "http://intranet-if.insa-lyon.fr";
 
 static int TIME_INTERVAL(1);
+
+static int LOG_LIMIT = 50;
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Fonctions publiques
@@ -144,8 +146,9 @@ int main(int argc, char ** argv)
 
     cout << "Récupération données" << endl;
     //Récupération des données logs et traitement
-    while(flux)
+    while(flux && cpt < LOG_LIMIT)
     {
+
         bool valid(true);
         LogElement le;
         if (flux >> le)
@@ -172,7 +175,11 @@ int main(int argc, char ** argv)
     //Affichage des résultats en fonction des options
     cout << "NbLignes acceptées : " << cpt << endl;
 
+    cout << stats << endl << endl;
+
+
     //Affichage du top 10 dans tous les cas
+
     stats.AffichageTop10();
 
     // Instanciation d'un générateur de graphes si l'option -g est activée
@@ -253,6 +260,13 @@ void ErrorHandler(int argc, char ** argv, string & logName, ArgStatus & status, 
 
             optionG=true;
 
+            if(cmd_flux.eof())
+            {
+                cout << "261 fin de fichier sans dotName " << endl;
+                status = ArgStatus::ERROR_SYNTAX;
+                return;
+            }
+
             cmd_flux>>tampon;
 
             if(tampon.substr(tampon.length()-4)!=".dot")
@@ -307,6 +321,13 @@ void ErrorHandler(int argc, char ** argv, string & logName, ArgStatus & status, 
             }
 
             optionT=true;
+
+            if(cmd_flux.eof())
+            {
+                cout << "321 et fin de fichier , pas de parametre temps " << endl;
+                status=ArgStatus::ERROR_SYNTAX;
+                return;
+            }
 
             cmd_flux.clear();
             cmd_flux>>timeFilter;

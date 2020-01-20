@@ -58,17 +58,18 @@ public:
     void AffichageTop10();
 
 //------------------------------------------------- Surcharge d'opérateurs
-    //Stats & operator = ( const Stats & unStates );
+    Stats & operator = ( const Stats & unStates );
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    friend ostream & operator << (ostream & os, Stats & unState);
+    friend ostream & operator << (ostream & os, Stats & unStats);
     // Mode d'emploi :
     //
     // Contrat :
     //
+
     Map_Cibles_Pairs & GetMapCibles();
     // Mode d'emploi :
     //
@@ -76,7 +77,7 @@ public:
     //
 
 //-------------------------------------------- Constructeurs - destructeur
-    Stats (const Stats & unStates );
+    Stats (const Stats & unStats );
     // Mode d'emploi (constructeur de copie) :
     //
     // Contrat :

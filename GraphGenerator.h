@@ -37,7 +37,7 @@ public:
     void Generer(Map_Cibles_Pairs & unMapCibles, string & dotName);
 
 //------------------------------------------------- Surcharge d'opérateurs
-//    GraphGenerator & operator = ( const GraphGenerator & unGraphGenerateur );
+    GraphGenerator & operator = ( const GraphGenerator & unGraphGenerateur );
     // Mode d'emploi :
     //
     // Contrat :

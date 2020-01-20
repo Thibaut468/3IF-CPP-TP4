@@ -70,20 +70,21 @@ void Stats::AffichageTop10(){
 }
 
 //------------------------------------------------- Surcharge d'opérateurs
-//Stats & Stats::operator = ( const Stats & unStates )
+Stats & Stats::operator = ( const Stats & unStates )
 // Algorithme :
 //
-//{
-//} //----- Fin de operator =
+{
+    return *this;
+} //----- Fin de operator =
 
-ostream & operator << (ostream & os, Stats & unState)
+ostream & operator << (ostream & os, Stats & unStats)
 // Algorithme :
 //
 {
     Map_Cibles_Pairs::iterator IterCibles;
     Map_Referers_NbHit::iterator IterReferers;
     int n = 0;
-    for(IterCibles =unState.GetMapCibles().begin(); IterCibles !=unState.GetMapCibles().end(); IterCibles++ ){
+    for(IterCibles =unStats.GetMapCibles().begin(); IterCibles !=unStats.GetMapCibles().end(); IterCibles++ ){
         os <<"*************************Cible et son nombre de hit total*************************" <<endl;
         os << "****** \"" << IterCibles->NameCible << "\"   \" Nombre de hit total: "  << IterCibles->Pair.NbHitTotal  << "\" ******"<<endl;
         os <<"*************************Referers correspondant - debut*************************" <<endl;

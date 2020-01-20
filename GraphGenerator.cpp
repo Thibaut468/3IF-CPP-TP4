@@ -59,15 +59,18 @@ void GraphGenerator::Generer(Map_Cibles_Pairs & unMapCibles, string & dotName){
         }
     }
     file<<"}"<<endl;
+
+    cout << "File "+dotName+" generate with success." << endl;
 }
 
 
 //------------------------------------------------- Surcharge d'opérateurs
-//GraphGenerator & GraphGenerator::operator = ( const GraphGenerator & unGraphGenerateur )
+GraphGenerator & GraphGenerator::operator=(const GraphGenerator &unGraphGenerateur)
 // Algorithme :
 //
-//{
-//} //----- Fin de operator =
+{
+    return *this;
+} //----- Fin de operator =
 
 
 //-------------------------------------------- Constructeurs - destructeur

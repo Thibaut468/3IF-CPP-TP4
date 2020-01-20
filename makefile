@@ -7,10 +7,16 @@ SRCS= main.cpp InputLogStream.cpp LogElement.cpp LogFilter.cpp LogTimeFilter.cpp
 OBJS=$(SRCS:.c=.o)
 
 $(MAIN): $(OBJS)
-	$(CC) -o $(MAIN) $(OBJS) $(DFLAGS)
+	@echo Compilation des objets et edition des liens
+	@$(CC) -o $(MAIN) $(OBJS) $(DFLAGS)
 
 %.o : %.cpp
 	$(CC) $(CFLAGS) -c $< -o $@
+
+.PHONY : dot
+dot : 
+	@echo Génération graphique dot en png
+	dot -Tpng -o graph.png graph.dot
 
 .PHONY : launch
 launch : $(MAIN)
