@@ -32,7 +32,8 @@ void Stats::AjouterInfo (Informations & info){
     MapCibles[info.URL].NbHitTotal++;
 }
 
-CiblesTop10 Stats::FindTop10()
+
+void Stats::AffichageTop10()
 // Algorithme : on cherche le NbHitTotal max dans le map MapCibles,
 //  on l'enregistre dans un tableau, ensuite on remplace le NbHitTotal par 0,
 // a la fin de l'execution, on remet les valeurs  de NbHitTotal
@@ -55,17 +56,14 @@ CiblesTop10 Stats::FindTop10()
     for(int j = 0; j < 10; j++){
        MapCibles[myTop10[j]].NbHitTotal = NbHitTotalTop10[j];
    }
-    return myTop10;
-}
 
-void Stats::AffichageTop10(){
-    CiblesTop10 desCiblesTop10 = FindTop10();
+
     int n = 0;
 
     cout<<"Top 10 cibles consultes par ordre decroissant"<<endl;
     for(int i = 0; i < 10; i++){
         n++;
-        cout<<n<<"° : \" "<<desCiblesTop10[i]<<" \" "<<endl;
+        cout<<n<<"° :  "<<myTop10[i]<<"    (Nombre de hits totaux : "<<NbHitTotalTop10[i]<<" ) "<<endl;
     }
 }
 

@@ -62,7 +62,7 @@ static string SERVER_URL = "http://intranet-if.insa-lyon.fr";
 
 static int TIME_INTERVAL(1);
 
-static int LOG_LIMIT = 50;
+static int LOG_LIMIT = 10000000;
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Fonctions publiques

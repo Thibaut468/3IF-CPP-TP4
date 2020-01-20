@@ -54,7 +54,7 @@ public:
     // Contrat :
     //
     void AjouterInfo (Informations & info);
-    CiblesTop10 FindTop10();
+
     void AffichageTop10();
 
 //------------------------------------------------- Surcharge d'opérateurs
