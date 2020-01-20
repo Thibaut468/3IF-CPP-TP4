@@ -31,7 +31,7 @@ using namespace std;
 //------------------------------------------------- Surcharge d'opérateurs
 LogFilter & LogFilter::operator = ( const LogFilter & unLogFilter )
 // Algorithme :
-//
+// Se renvoi lui même pour éviter l'affectation
 {
     return *this;
 } //----- Fin de operator =
@@ -41,7 +41,7 @@ LogFilter & LogFilter::operator = ( const LogFilter & unLogFilter )
 
 LogFilter::LogFilter ( const LogFilter & unLogFilter )
 // Algorithme :
-//
+// /
 {
 #ifdef MAP
     cout << "Appel au constructeur de copie de <LogFilter>" << endl;
@@ -50,7 +50,7 @@ LogFilter::LogFilter ( const LogFilter & unLogFilter )
 
 LogFilter::LogFilter ( )
 // Algorithme :
-//
+// /
 {
 #ifdef MAP
     cout << "Appel au constructeur de <LogFilter>" << endl;
@@ -60,7 +60,7 @@ LogFilter::LogFilter ( )
 
 LogFilter::~LogFilter ( )
 // Algorithme :
-//
+// /
 {
 #ifdef MAP
     cout << "Appel au destructeur de <LogFilter>" << endl;

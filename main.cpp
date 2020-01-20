@@ -62,7 +62,7 @@ static string SERVER_URL = "http://intranet-if.insa-lyon.fr";
 
 static int TIME_INTERVAL(1);
 
-static int LOG_LIMIT = 10000000;
+static int LOG_LIMIT = 100000;
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Fonctions publiques
@@ -115,7 +115,7 @@ int main(int argc, char ** argv)
         return EXIT_FAILURE;
     }
 
-    cout << "Mise en place des filtres" << endl;
+    //cout << "Mise en place des filtres" << endl;
 
     //Mise en place des filtres
     vector<LogFilter*> filters;
@@ -123,8 +123,9 @@ int main(int argc, char ** argv)
     if(optionT)
     {
         ltf = new LogTimeFilter(timeFilter,TIME_INTERVAL);
-
         filters.emplace_back(ltf);
+
+        cout << "Warning : only hits between "+to_string(timeFilter)+"h and "+to_string(timeFilter+TIME_INTERVAL)+"h have been taken into account" << endl;
     }
 
     if(optionE)
@@ -140,8 +141,9 @@ int main(int argc, char ** argv)
         extensionsFilter.emplace_back(".bmp");
 
         lef = new LogExtensionFilter(extensionsFilter);
-
         filters.emplace_back(lef);
+
+        cout << "Warning : hits and refs on image, css or javascript extensions have been not taken into account" << endl;
     }
 
     cout << "Récupération données" << endl;
@@ -175,9 +177,6 @@ int main(int argc, char ** argv)
     //Affichage des résultats en fonction des options
     cout << "NbLignes acceptées : " << cpt << endl;
 
-    cout << stats << endl << endl;
-
-
     //Affichage du top 10 dans tous les cas
 
     stats.AffichageTop10();
@@ -206,7 +205,6 @@ void ErrorHandler(int argc, char ** argv, string & logName, ArgStatus & status, 
 
     if(argc == 1) //Pas d'arguments
     {
-        cout << "191" << endl;
         status=ArgStatus::ERROR_SYNTAX;
         return;
     }
@@ -222,14 +220,10 @@ void ErrorHandler(int argc, char ** argv, string & logName, ArgStatus & status, 
         command += string(argv[i]);
     }
 
-    cout << "command = "<< command << endl;
-
     istringstream cmd_flux(command);
     string tampon;
 
     while(cmd_flux>>tampon) {
-
-        cout << "Partie analysé : " << tampon << endl;
 
         if(tampon.length()>4 && tampon.substr(tampon.length()-4)==".log")
         {
@@ -239,7 +233,6 @@ void ErrorHandler(int argc, char ** argv, string & logName, ArgStatus & status, 
 
             if(!flux.is_open())
             {
-                cout << "236 et tampon = " << tampon << endl;
                 status = ArgStatus::ERROR_INVALID_LOG_OPENING;
                 return;
             }
@@ -253,7 +246,6 @@ void ErrorHandler(int argc, char ** argv, string & logName, ArgStatus & status, 
         {
             if(optionG) //Doublon de parametre
             {
-                cout << "248 et tampon = " << tampon << endl;
                 status=ArgStatus::ERROR_SYNTAX_UNREPEATABLE_OPTION_G;
                 return;
             }
@@ -262,7 +254,6 @@ void ErrorHandler(int argc, char ** argv, string & logName, ArgStatus & status, 
 
             if(cmd_flux.eof())
             {
-                cout << "261 fin de fichier sans dotName " << endl;
                 status = ArgStatus::ERROR_SYNTAX;
                 return;
             }
@@ -271,7 +262,6 @@ void ErrorHandler(int argc, char ** argv, string & logName, ArgStatus & status, 
 
             if(tampon.substr(tampon.length()-4)!=".dot")
             {
-                cout << "259 et tampon = " << tampon << endl;
                 status = ArgStatus::ERROR_SYNTAX_DOT_EXT_OPTION_G;
                 return;
             }
@@ -279,7 +269,6 @@ void ErrorHandler(int argc, char ** argv, string & logName, ArgStatus & status, 
             ifstream dotFile(tampon);
             if(dotFile)
             {
-                cout << "249 et tampon = " << tampon << endl;
                 status = ArgStatus::ERROR_SYNTAX_DOT_EXIST;
                 return;
             }
@@ -290,7 +279,6 @@ void ErrorHandler(int argc, char ** argv, string & logName, ArgStatus & status, 
             ofstream dotFileOutput(tampon);
             if(!dotFileOutput)
             {
-                cout << "278 et tampon = " << tampon << endl;
                 status = ArgStatus::ERROR_SYNTAX_DOT_CANT_OPEN_OPTION_G;
                 return;
             }
@@ -304,7 +292,6 @@ void ErrorHandler(int argc, char ** argv, string & logName, ArgStatus & status, 
         {
             if(optionE) //Doublon de parametre
             {
-                cout << "292 et tampon = " << tampon << endl;
                 status=ArgStatus::ERROR_SYNTAX_UNREPEATABLE_OPTION_E;
                 return;
             }
@@ -315,7 +302,6 @@ void ErrorHandler(int argc, char ** argv, string & logName, ArgStatus & status, 
         {
             if(optionT) //Doublon de parametre
             {
-                cout << "303 et tampon = " << tampon << endl;
                 status=ArgStatus::ERROR_SYNTAX_UNREPEATABLE_OPTION_T;
                 return;
             }
@@ -324,7 +310,6 @@ void ErrorHandler(int argc, char ** argv, string & logName, ArgStatus & status, 
 
             if(cmd_flux.eof())
             {
-                cout << "321 et fin de fichier , pas de parametre temps " << endl;
                 status=ArgStatus::ERROR_SYNTAX;
                 return;
             }
@@ -334,21 +319,18 @@ void ErrorHandler(int argc, char ** argv, string & logName, ArgStatus & status, 
 
             if(!cmd_flux)
             {
-                cout << "315 et tampon = " << tampon << endl;
                 status=ArgStatus::ERROR_SYNTAX_NO_TIME_OPTION_T;
                 return;
             }
 
             if((timeFilter<0) || (timeFilter > 23))
             {
-                cout << "322 et tampon = " << tampon << endl;
                 status=ArgStatus::ERROR_INVALID_TIME;
                 return;
             }
         }
         else
         {
-            cout << "329 et tampon = " << tampon << endl;
             status=ArgStatus::ERROR_SYNTAX;
             return;
         }

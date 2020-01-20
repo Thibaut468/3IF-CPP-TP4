@@ -1,5 +1,5 @@
 /*************************************************************************
-                     LogTimeFilter  -  description
+                 LogTimeFilter  -  Filtre sur l'heure des logs
                              -------------------
     début                : 14/01/2020
     copyright            : (C) 2020 par GRAVEY Thibaut & CHEN Gong
@@ -20,8 +20,9 @@
 
 //------------------------------------------------------------------------
 // Rôle de la classe <LogTimeFilter>
-//
-//
+// Hérite de la classe LogFilter. Classe réutilisable permettant de refuser certains LogElements
+// (les filtrer) s'ils n'appartiennent pas à un créneau horaire explicitement défini.
+// On paramètre le filtre à sa création.
 //------------------------------------------------------------------------
 
 class LogTimeFilter : public LogFilter
@@ -38,14 +39,14 @@ public:
 
     bool Authorize(LogElement & le) const;
     // Mode d'emploi :
-    //
+    // Renvoi vrai si le LogElement passe le filtre, faux sinon.
     // Contrat :
     //
 
 //------------------------------------------------- Surcharge d'opérateurs
     LogTimeFilter & operator = (const LogTimeFilter & unLogTimeFilter );
     // Mode d'emploi :
-    //
+    // Surcharge de l'opérateur pour rendre nulle son utilisation. On renvoi l'objet en lui même. Un filtre ne s'affecte pas.
     // Contrat :
     //
 
@@ -54,19 +55,19 @@ public:
 
     LogTimeFilter (const LogTimeFilter & unLogTimeFilter );
     // Mode d'emploi (constructeur de copie) :
-    //
+    // /
     // Contrat :
     //
 
     LogTimeFilter (int t = 0, int inter = 0);
     // Mode d'emploi :
-    //
+    // On donne en paramètre les bornes du filtre [t,t+inter[
     // Contrat :
-    //
+    // 0 <= t+inter <=24
 
     virtual ~LogTimeFilter ( );
     // Mode d'emploi :
-    //
+    // /
     // Contrat :
     //
 

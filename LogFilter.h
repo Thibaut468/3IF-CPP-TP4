@@ -1,5 +1,5 @@
 /*************************************************************************
-                     LogFilter  -  description
+                     LogFilter  -  Filtre de Log
                              -------------------
     début                : 14/01/2020
     copyright            : (C) 2020 par GRAVEY Thibaut & CHEN Gong
@@ -19,8 +19,10 @@
 
 //------------------------------------------------------------------------
 // Rôle de la classe <LogFilter>
-//
-//
+// Classe abstraite et non instanciable (méthode virtuelle pure)
+// Définissant la base des filtres pour LogElement.
+// Classe réutilisable, à laquelle on peut ajouter de nombreux filtres
+// grâce au concept d'héritage
 //------------------------------------------------------------------------
 
 class LogFilter
@@ -37,7 +39,7 @@ public:
 
     virtual bool Authorize(LogElement & le) const = 0;
     // Mode d'emploi:
-    //
+    // Renvoi vrai si le critère du filtre est respecter et le LogElement passe, faux sinon
     // Contrat :
     //
 
@@ -45,7 +47,7 @@ public:
 //------------------------------------------------- Surcharge d'opérateurs
     virtual LogFilter & operator = ( const LogFilter & unLogFilter );
     // Mode d'emploi :
-    //
+    // Surcharger pour éviter son utilisation. On ne souhaite pas qu'un filtre s'affecte.
     // Contrat :
     //
 
@@ -53,19 +55,19 @@ public:
 //-------------------------------------------- Constructeurs - destructeur
     LogFilter ( const LogFilter & unLogFilter );
     // Mode d'emploi (constructeur de copie) :
-    //
+    // /
     // Contrat :
     //
 
     LogFilter ( );
     // Mode d'emploi :
-    //
+    // /
     // Contrat :
     //
 
     virtual ~LogFilter ( );
     // Mode d'emploi :
-    //
+    // /
     // Contrat :
     //
 

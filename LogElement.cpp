@@ -30,7 +30,7 @@ using namespace std;
 
 Informations & LogElement::GetInfos()
 // Algorithme :
-//
+// /
 {
     return infos;
 } //----- Fin de GetInfos
@@ -39,7 +39,7 @@ Informations & LogElement::GetInfos()
 //------------------------------------------------- Surcharge d'opérateurs
 LogElement & LogElement::operator = ( const LogElement & unLogElement )
 // Algorithme :
-//
+// Copie simple de chaque attribut dans le nouvel objet, en évitant le cas le1=le1
 {
     if(this != &unLogElement)
     {
@@ -66,7 +66,10 @@ LogElement & LogElement::operator = ( const LogElement & unLogElement )
 
 ostream & operator << (ostream & os, LogElement & el)
 // Algorithme :
-//
+// Utilisation de << du stream pour afficher simplement les valeurs de chaque attribut.
+// On reconstitue, dans l'ordre, la ligne de log
+// On vient aussi formater les entrées numériques
+// On renvoi l'os pour l'enchainement
 {
     os << el.GetInfos().IP << " " << el.GetInfos().userLogName << " " << el.GetInfos().authentificatedUser << " ";
     os << "[";
@@ -107,7 +110,7 @@ ostream & operator << (ostream & os, LogElement & el)
 //-------------------------------------------- Constructeurs - destructeur
 LogElement::LogElement ( const LogElement & unLogElement )
 // Algorithme :
-//
+// /
 {
 #ifdef MAP
     cout << "Appel au constructeur de copie de <LogElement>" << endl;
@@ -117,7 +120,7 @@ LogElement::LogElement ( const LogElement & unLogElement )
 
 LogElement::LogElement (const Informations & i) : infos(i)
 // Algorithme :
-//
+// /
 {
 
 #ifdef MAP
@@ -128,7 +131,7 @@ LogElement::LogElement (const Informations & i) : infos(i)
 
 LogElement::~LogElement ( )
 // Algorithme :
-//
+// /
 {
 #ifdef MAP
     cout << "Appel au destructeur de <LogElement>" << endl;

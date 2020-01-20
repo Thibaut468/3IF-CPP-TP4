@@ -1,5 +1,5 @@
 /*************************************************************************
-                       LogExtensionFilter  -  description
+       LogExtensionFilter  -  Filtre sur les extensions de documents
                              -------------------
     début                : 14/01/2020
     copyright            : (C) 2020 par GRAVEY Thibaut & CHEN Gong
@@ -31,7 +31,8 @@ using namespace std;
 
 bool LogExtensionFilter::Authorize(LogElement &le) const
 // Algorithme
-//
+// On regarde si la cible et/ou le referer de l'élement de log est d'une extension interdite ou non.
+// Si elle est interdite dans l'un ou l'autre cas, on renvoi faux. Sinon on renvoi vrai et on accepte ce log.
 {
     bool cible(true);
     bool ref(true);
@@ -51,14 +52,14 @@ bool LogExtensionFilter::Authorize(LogElement &le) const
 
 void LogExtensionFilter::AddExtension(string ext)
 // Algorithme
-//
+// /
 {
-    extensions.push_back(ext);
+    extensions.emplace_back(ext);
 } // ---- Fin de AddExtension
 
 bool LogExtensionFilter::RemoveExtension(string ext)
 // Algorithme
-//
+// On retire l'élement en regardant si on le trouve. Le cas échéant, on renvoi faux, sinon on supprime et on renvoi vrai.
 {
     vector<string>::iterator pos = find(extensions.begin(),extensions.end(),ext);
     if(pos!=extensions.end())
@@ -74,7 +75,7 @@ bool LogExtensionFilter::RemoveExtension(string ext)
 
 LogExtensionFilter& LogExtensionFilter::operator=(const LogExtensionFilter &unLogExtensionFilter)
 // Algorithme :
-//
+// On renvoi l'objet lui meme pour éviter l'affectation d'un filtre.
 {
     return *this;
 } //----- Fin de operator =
@@ -84,7 +85,7 @@ LogExtensionFilter& LogExtensionFilter::operator=(const LogExtensionFilter &unLo
 
 LogExtensionFilter::LogExtensionFilter ( const LogExtensionFilter & unLogExtensionFilter )
 // Algorithme :
-//
+// On ajoute un par un les extensions au nouveau filtre.
 {
 
     for(vector<string>::const_iterator it=unLogExtensionFilter.extensions.begin(); it!=unLogExtensionFilter.extensions.end(); ++it)
@@ -99,7 +100,7 @@ LogExtensionFilter::LogExtensionFilter ( const LogExtensionFilter & unLogExtensi
 
 LogExtensionFilter::LogExtensionFilter(vector<string> & ext) : LogFilter()
 // Algorithme :
-//
+// On ajoute un par un les extensions passées en paramètres.
 {
 
     for(vector<string>::iterator it=ext.begin(); it!=ext.end(); ++it)
@@ -115,7 +116,7 @@ LogExtensionFilter::LogExtensionFilter(vector<string> & ext) : LogFilter()
 
 LogExtensionFilter::~LogExtensionFilter ( )
 // Algorithme :
-//
+// /
 {
 #ifdef MAP
     cout << "Appel au destructeur de <LogExtensionFilter>" << endl;

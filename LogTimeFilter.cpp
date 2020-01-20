@@ -1,5 +1,5 @@
 /*************************************************************************
-                       LogTimeFilter  -  description
+                   LogTimeFilter  -  Filtre sur l'heure des logs
                              -------------------
     début                : 14/01/2020
     copyright            : (C) 2020 par GRAVEY Thibaut & CHEN Gong
@@ -30,7 +30,8 @@ using namespace std;
 
 bool LogTimeFilter::Authorize(LogElement &le) const
 // Algorithme
-//
+// On regarde si le log à bien été produit dans le créneau [time, time+interval[.
+// On renvoi vrai si c'est le cas, faux sinon.
 {
     return ((le.GetInfos().hour >= time) && (le.GetInfos().hour < (time+interval)));
 } // ---- Fin de Authorize
@@ -38,7 +39,7 @@ bool LogTimeFilter::Authorize(LogElement &le) const
 //------------------------------------------------- Surcharge d'opérateurs
 LogTimeFilter & LogTimeFilter::operator = ( const LogTimeFilter & unLogTimeFilter )
 // Algorithme :
-//
+// On renvoi l'objet lui meme pour éviter l'affectation d'un filtre.
 {
     return *this;
 } //----- Fin de operator =
@@ -48,7 +49,7 @@ LogTimeFilter & LogTimeFilter::operator = ( const LogTimeFilter & unLogTimeFilte
 
 LogTimeFilter::LogTimeFilter ( const LogTimeFilter & unLogTimeFilter )
 // Algorithme :
-//
+// /
 {
 
     time=unLogTimeFilter.time;
@@ -61,7 +62,7 @@ LogTimeFilter::LogTimeFilter ( const LogTimeFilter & unLogTimeFilter )
 
 LogTimeFilter::LogTimeFilter (int t, int inter) : LogFilter(), time(t), interval(inter)
 // Algorithme :
-//
+// /
 {
 #ifdef MAP
     cout << "Appel au constructeur de <LogTimeFilter>" << endl;
@@ -71,7 +72,7 @@ LogTimeFilter::LogTimeFilter (int t, int inter) : LogFilter(), time(t), interval
 
 LogTimeFilter::~LogTimeFilter ( )
 // Algorithme :
-//
+// /
 {
 #ifdef MAP
     cout << "Appel au destructeur de <LogTimeFilter>" << endl;

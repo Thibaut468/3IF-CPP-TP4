@@ -1,5 +1,5 @@
 /*************************************************************************
-       InputLogStream  -  Gestion d'un log en flux d'entrée
+       InputLogStream  -  Gestion d'un log en flux d'entrée fichier
                              -------------------
     début                : 14/01/2020
     copyright            : (C) 2020 par GRAVEY Thibaut & CHEN Gong
@@ -30,7 +30,7 @@ using namespace std;
 
 string & InputLogStream::GetServerUrl()
 // Algorithme :
-//
+// /
 {
     return serverURL;
 } //----- Fin de GetServerUrl
@@ -46,6 +46,10 @@ InputLogStream & InputLogStream::operator = (const InputLogStream & uniflogstrea
 
 InputLogStream & operator >> (InputLogStream & ils, LogElement & le)
 //Algorithme
+// On vient récupérer petit à petit chaque information en lisant une ligne à la fois et en utilisant
+// les bons délimiteurs pour ne rien perdre. On retire aussi l'url du serveur en passant au referer.
+// Certaines valeurs numériques ne sont pas renseignés (-). Dans ce cas, on les mets à 0. permet aussi de lever EOF.
+// Renvoi un stream pour l'enchainement
 {
     string tampon;
 
@@ -137,7 +141,7 @@ InputLogStream & operator >> (InputLogStream & ils, LogElement & le)
 
 InputLogStream::InputLogStream (const string & cheminAcces,const string & url) : ifstream(cheminAcces), serverURL(url)
 // Algorithme :
-//
+// /
 {
 #ifdef MAP
     cout << "Appel au constructeur de <InputLogStream>" << endl;
@@ -147,7 +151,7 @@ InputLogStream::InputLogStream (const string & cheminAcces,const string & url) :
 
 InputLogStream::~InputLogStream ( )
 // Algorithme :
-//
+// /
 {
 #ifdef MAP
     cout << "Appel au destructeur de <InputLogStream>" << endl;
@@ -161,7 +165,7 @@ InputLogStream::~InputLogStream ( )
 
 InputLogStream::InputLogStream (const InputLogStream & uniflogstream )
 // Algorithme :
-//
+// Constructeur interdit (protégé)
 {
 #ifdef MAP
     cout << "Appel au constructeur de copie de <InputLogStream>" << endl;
