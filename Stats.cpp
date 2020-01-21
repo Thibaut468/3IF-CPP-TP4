@@ -60,10 +60,14 @@ void Stats::AffichageTop10()
 
     int n = 0;
 
-    cout<<"Top 10 cibles consultes par ordre decroissant"<<endl;
-    for(int i = 0; i < 10; i++){
+    cout<<"Top 10 targets consultes par ordre decroissant"<<endl;
+    for(int i = 0; i < 10 ; i++){
+        if(NbHitTotalTop10[i] == 0 ){
+            cout<<"No more targets in this case"<<endl;
+            break;
+        }
         n++;
-        cout<<n<<"° :  "<<myTop10[i]<<"    (Nombre de hits totaux : "<<NbHitTotalTop10[i]<<" ) "<<endl;
+        cout<<n<<"° :  "<<myTop10[i]<<"    (Total hits : "<<NbHitTotalTop10[i]<<" ) "<<endl;
     }
 }
 

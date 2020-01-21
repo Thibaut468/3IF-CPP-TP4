@@ -49,12 +49,22 @@ void GraphGenerator::Generer(Map_Cibles_Pairs & unMapCibles, string & dotName)
     for(itC = unMapCibles.begin(); itC != unMapCibles.end(); itC++){
         i = j;
         ++j;
-        Nodes.push_back(itC->NameCible);
-        file<<"node"<<i<<" [ label = \""<<itC->NameCible<<"\" ];"<<endl;
+
+        itV = find(Nodes.begin(), Nodes.end(), itC->NameCible);
+        if( itV == Nodes.end() ){
+            Nodes.push_back(itC->NameCible);
+            file<<"node"<<i<<" [ label = \""<<itC->NameCible<<"\" ];"<<endl;
+                            file<<"existe pas"<<endl;
+        }else{
+            tmp = i;
+            i = distance(Nodes.begin(),itV);
+        }
+
         for(itR = itC->Pair.MapReferers.begin(); itR != itC->Pair.MapReferers.end(); itR++ ){
-            itV = find(Nodes.begin(), Nodes.end(), itR->NameCible);
+
+        itV = find(Nodes.begin(), Nodes.end(), itR->NameRefere);
             if( itV == Nodes.end() ){
-                Nodes.push_back(itR->NameCible);
+                Nodes.push_back(itR->NameRefere);
                 file<<"node"<<j<<" [ label = \""<<itR->NameRefere<<"\" ];"<<endl;
                 file<< "node"<< j << " -> " <<"node"<< i << " [ label = \""<< itR->NbHit <<"\" ];"<<endl;
                 ++j;
