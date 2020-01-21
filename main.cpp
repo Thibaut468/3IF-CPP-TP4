@@ -46,16 +46,16 @@ enum ArgStatus {
 
 static string  StatusMessage[ArgStatus::ARGS_STATUS_SIZE] = {
         "Analog launched without errors.",
-        "Syntax error.",
-        "Syntax error : Invalid time - Parameter must be an integer in [0,23]",
-        "Syntax error : Invalid log file - Can't open it.",
-        "Syntax error : Dot file already exist",
-        "Syntax error : You can't repeat option -e in analog command",
-        "Syntax error : You can't repeat option -g in analog command",
-        "Syntax error : You can't repeat option -t in analog command",
-        "Syntax error :  Option -t not followed by an int",
-        "Syntax error :  Option -g not followed by a dot file",
-        "Syntax error :  Option -g can't create a dot file with this name"
+        "[ERROR] Syntax : Use ./analog [-g graphName.dot] [-e] [-t time] fileName.log",
+        "[ERROR] Syntax : Invalid time - Parameter must be an integer in [0,23]",
+        "[ERROR] Log-file : Invalid or inexistant log-file - Can't open it.",
+        "[ERROR] Dot-file :  Dot-file already exist.",
+        "[ERROR] Syntax : You can't repeat option -e in analog command. Use ./analog [-g graphName.dot] [-e] [-t time] fileName.log",
+        "[ERROR] Syntax : You can't repeat option -g in analog command. Use ./analog [-g graphName.dot] [-e] [-t time] fileName.log",
+        "[ERROR] Syntax : You can't repeat option -t in analog command. Use ./analog [-g graphName.dot] [-e] [-t time] fileName.log",
+        "[ERROR] Syntax :  Option -t not followed by an int. Use ./analog [-g graphName.dot] [-e] [-t time] fileName.log",
+        "[ERROR] Syntax :  Option -g not followed by a dot file. Use ./analog [-g graphName.dot] [-e] [-t time] fileName.log",
+        "[ERROR] Syntax :  Option -g can't create a dot file with this name. Use ./analog [-g graphName.dot] [-e] [-t time] fileName.log"
 };
 
 static string SERVER_URL = "http://intranet-if.insa-lyon.fr";
@@ -115,7 +115,7 @@ int main(int argc, char ** argv)
         return EXIT_FAILURE;
     }
 
-    //cout << "Mise en place des filtres" << endl;
+    cout << StatusMessage[ArgStatus::SUCCESS] << endl;
 
     //Mise en place des filtres
     vector<LogFilter*> filters;
@@ -175,7 +175,14 @@ int main(int argc, char ** argv)
     }
 
     //Affichage des résultats en fonction des options
-    cout << "NbLignes acceptées : " << cpt << endl;
+    if(cpt==0)
+    {
+        cout << "Warning : Log-file generate 0 log-line with the actual analog configuration." << endl;
+    }
+    else
+    {
+        cout << cpt << " log-lines have been taken into account after filters." << endl;
+    }
 
     //Affichage du top 10 dans tous les cas
 
