@@ -1,9 +1,9 @@
 /*************************************************************************
                            States  -  description
                              -------------------
-    début                : $DATE$
-    copyright            : (C) $YEAR$ par $AUTHOR$
-    e-mail               : $EMAIL$
+début                : 21/01/2020
+copyright            : (C) 2020 par GRAVEY Thibaut & CHEN Gong
+e-mail               : $EMAIL$
 *************************************************************************/
 
 //---------- Interface de la classe <Stats> (fichier Stats.h) ----------------
@@ -54,19 +54,24 @@ public:
     // Contrat :
     //
     void AjouterInfo (Informations & info);
-
+    // Mode d'emploi : Pour ajouter une information dans cette classe Stats
+    // Contrat :
+    //
     void AffichageTop10();
-
+    // Mode d'emploi : Affichage de top 10 cibles les plus consultees.
+    //
+    // Contrat :
+    //
 //------------------------------------------------- Surcharge d'opérateurs
     Stats & operator = ( const Stats & unStates );
     // Mode d'emploi :
-    //
+    //Surchage de l'operateur d'affectation pour interdire l'affectation
     // Contrat :
     //
 
     friend ostream & operator << (ostream & os, Stats & unStats);
     // Mode d'emploi :
-    //
+    // pour afficher directement dans main
     // Contrat :
     //
 

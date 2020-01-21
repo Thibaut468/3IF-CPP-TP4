@@ -1,9 +1,9 @@
 /*************************************************************************
                            States  -  description
                              -------------------
-    début                : $DATE$
-    copyright            : (C) $YEAR$ par $AUTHOR$
-    e-mail               : $EMAIL$
+début                : 21/01/2020
+copyright            : (C) 2020 par GRAVEY Thibaut & CHEN Gong
+e-mail               : $EMAIL$
 *************************************************************************/
 
 //---------- Réalisation de la classe <Stats> (fichier Stats.cpp) ------------
@@ -27,7 +27,10 @@ using namespace std;
 //{
 //} //----- Fin de Méthode
 
-void Stats::AjouterInfo (Informations & info){
+void Stats::AjouterInfo (Informations & info)
+// Algorithme : Utilisation de deux maps et une paire comme une structure de donnees
+// pour stock les cibles et les referers et les nombres de hits correspondants.
+{
     MapCibles[info.URL].MapReferers[info.referer]++;
     MapCibles[info.URL].NbHitTotal++;
 }
@@ -80,7 +83,7 @@ Stats & Stats::operator = ( const Stats & unStates )
 } //----- Fin de operator =
 
 ostream & operator << (ostream & os, Stats & unStats)
-// Algorithme :
+// Algorithme : Surcharge de << pour faciliter l'affichage dans main
 //
 {
     Map_Cibles_Pairs::iterator IterCibles;
