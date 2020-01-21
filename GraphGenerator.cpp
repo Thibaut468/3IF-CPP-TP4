@@ -1,8 +1,8 @@
 /*************************************************************************
                            GraphGenerateur  -  description
                              -------------------
-    début                : $DATE$
-    copyright            : (C) $YEAR$ par $AUTHOR$
+    début                : 21/01/2020
+    copyright            : (C) 2020 par GRAVEY Thibaut & CHEN Gong
     e-mail               : $EMAIL$
 *************************************************************************/
 
@@ -30,7 +30,6 @@ using namespace std;
 //} //----- Fin de Méthode
 
 void GraphGenerator::Generer(Map_Cibles_Pairs & unMapCibles, string & dotName)
-// type GraphGenerator::Generer ( Map_Cibles_Pairs & unMapCibles, string & dotName )
 // Algorithme : pour eviter de creer plusieur fois le meme noeud, on utilise un if-else et un tempon d'int pour
 // retrouver le nom du noeud(soit un cible soit un referer).
 // le int i, et int j ici sont pour nommer les noeuds
@@ -49,12 +48,24 @@ void GraphGenerator::Generer(Map_Cibles_Pairs & unMapCibles, string & dotName)
     for(itC = unMapCibles.begin(); itC != unMapCibles.end(); itC++){
         i = j;
         ++j;
-        Nodes.push_back(itC->NameCible);
-        file<<"node"<<i<<" [ label = \""<<itC->NameCible<<"\" ];"<<endl;
+
+        itV = find(Nodes.begin(), Nodes.end(), itC->NameCible);
+        if( itV == Nodes.end() ){
+            Nodes.push_back(itC->NameCible);
+            file<<"node"<<i<<" [ label = \""<<itC->NameCible<<"\" ];"<<endl;
+                            file<<"existe pas"<<endl;
+        }else{
+            tmp = i;
+            i = distance(Nodes.begin(),itV);
+        }
+
         for(itR = itC->Pair.MapReferers.begin(); itR != itC->Pair.MapReferers.end(); itR++ ){
-            itV = find(Nodes.begin(), Nodes.end(), itR->NameCible);
+            if(itR->NameRefere == "-"){
+                continue;
+            }
+            itV = find(Nodes.begin(), Nodes.end(), itR->NameRefere);
             if( itV == Nodes.end() ){
-                Nodes.push_back(itR->NameCible);
+                Nodes.push_back(itR->NameRefere);
                 file<<"node"<<j<<" [ label = \""<<itR->NameRefere<<"\" ];"<<endl;
                 file<< "node"<< j << " -> " <<"node"<< i << " [ label = \""<< itR->NbHit <<"\" ];"<<endl;
                 ++j;

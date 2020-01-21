@@ -40,7 +40,7 @@ public:
 //------------------------------------------------- Surcharge d'opérateurs
     GraphGenerator & operator = ( const GraphGenerator & unGraphGenerateur );
     // Mode d'emploi :
-    //
+    // Surchage de l'operateur d'affectation pour interdire l'affectation
     // Contrat :
     //
 
