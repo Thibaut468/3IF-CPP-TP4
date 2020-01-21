@@ -3,7 +3,7 @@ CFLAGS=-g -Wall -Werror -ansi -pedantic -std=c++11
 DFLAGS=
 
 MAIN=analog
-SRCS= main.cpp InputLogStream.cpp LogElement.cpp LogFilter.cpp LogTimeFilter.cpp LogExtensionFilter.cpp Stats.cpp GraphGenerator.cpp
+SRCS= main.cpp InputLogStream.cpp LogElement.cpp LogFilter.cpp LogTimeFilter.cpp LogExtensionFilter.cpp LogUnknownRefFilter.cpp Stats.cpp GraphGenerator.cpp
 OBJS=$(SRCS:.c=.o)
 
 $(MAIN): $(OBJS)
