@@ -29,34 +29,43 @@ using namespace std;
 //{
 //} //----- Fin de Méthode
 
-void GraphGenerator::Generer(Map_Cibles_Pairs & unMapCibles, string & dotName){
-
+void GraphGenerator::Generer(Map_Cibles_Pairs & unMapCibles, string & dotName)
+// type GraphGenerator::Generer ( Map_Cibles_Pairs & unMapCibles, string & dotName )
+// Algorithme : pour eviter de creer plusieur fois le meme noeud, on utilise un if-else et un tempon d'int pour
+// retrouver le nom du noeud(soit un cible soit un referer).
+// le int i, et int j ici sont pour nommer les noeuds
+{
     ofstream file;
-    file.open(dotName);
+    file.open(dotName, ios::out | ios::trunc );
     file<<"digraph {"<<endl;
     Map_Cibles_Pairs::iterator itC;
     Map_Referers_NbHit::iterator itR;
-    int i = 0;
+    vector<string>::iterator itV;
+
+    int i = 0;  // pour cibles
+    int j = 0;  // pour referers
+    int tmp = 0;
+
     for(itC = unMapCibles.begin(); itC != unMapCibles.end(); itC++){
+        i = j;
+        ++j;
         Nodes.push_back(itC->NameCible);
         file<<"node"<<i<<" [ label = \""<<itC->NameCible<<"\" ];"<<endl;
-        i++;
-        for(itR = unMapCibles.begin()->Pair.MapReferers.begin(); itR != unMapCibles.begin()->Pair.MapReferers.end(); itR++ ){
-            Nodes.push_back(itC->NameCible);
-            file<<"node"<<i<<" [ label = \""<<itR->NameRefere<<"\" ];"<<endl;
-            i++;
+        for(itR = itC->Pair.MapReferers.begin(); itR != itC->Pair.MapReferers.end(); itR++ ){
+            itV = find(Nodes.begin(), Nodes.end(), itR->NameCible);
+            if( itV == Nodes.end() ){
+                Nodes.push_back(itR->NameCible);
+                file<<"node"<<j<<" [ label = \""<<itR->NameRefere<<"\" ];"<<endl;
+                file<< "node"<< j << " -> " <<"node"<< i << " [ label = \""<< itR->NbHit <<"\" ];"<<endl;
+                ++j;
+            }else{
+                tmp = j;
+                j = distance(Nodes.begin(),itV);
+                file<< "node"<< j << " -> " <<"node"<< i << " [ label = \""<< itR->NbHit <<"\" ];"<<endl;
+                j = tmp;
+            }
         }
-    }
-    file<<endl;
-    i = 0;
-    int j = 1;
-    for(itC = unMapCibles.begin(); itC != unMapCibles.end(); itC++){
-        i =  j;
-        j++;
-        for(itR = unMapCibles.begin()->Pair.MapReferers.begin(); itR != unMapCibles.begin()->Pair.MapReferers.end(); itR++ ){
-            file<< "node"<< i << " -> " <<"node"<< j << " [ label = \""<< itR->NbHit <<"\" ];"<<endl;
-            j++;
-        }
+        file<<endl;
     }
     file<<"}"<<endl;
 
