@@ -1,8 +1,8 @@
 /*************************************************************************
                            GraphGenerateur  -  description
                              -------------------
-    début                : $DATE$
-    copyright            : (C) $YEAR$ par $AUTHOR$
+    début                : 21/01/2020
+    copyright            : (C) 2020 par GRAVEY Thibaut & CHEN Gong
     e-mail               : $EMAIL$
 *************************************************************************/
 
@@ -30,7 +30,6 @@ using namespace std;
 //} //----- Fin de Méthode
 
 void GraphGenerator::Generer(Map_Cibles_Pairs & unMapCibles, string & dotName)
-// type GraphGenerator::Generer ( Map_Cibles_Pairs & unMapCibles, string & dotName )
 // Algorithme : pour eviter de creer plusieur fois le meme noeud, on utilise un if-else et un tempon d'int pour
 // retrouver le nom du noeud(soit un cible soit un referer).
 // le int i, et int j ici sont pour nommer les noeuds
@@ -61,8 +60,10 @@ void GraphGenerator::Generer(Map_Cibles_Pairs & unMapCibles, string & dotName)
         }
 
         for(itR = itC->Pair.MapReferers.begin(); itR != itC->Pair.MapReferers.end(); itR++ ){
-
-        itV = find(Nodes.begin(), Nodes.end(), itR->NameRefere);
+            if(itR->NameRefere == "-"){
+                continue;
+            }
+            itV = find(Nodes.begin(), Nodes.end(), itR->NameRefere);
             if( itV == Nodes.end() ){
                 Nodes.push_back(itR->NameRefere);
                 file<<"node"<<j<<" [ label = \""<<itR->NameRefere<<"\" ];"<<endl;
