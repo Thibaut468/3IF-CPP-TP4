@@ -106,7 +106,8 @@ int main(int argc, char ** argv)
     }
 
     //Ouverture du flux (le fichier log)
-    InputLogStream flux("../"+logName,SERVER_URL);
+
+    InputLogStream flux(logName,SERVER_URL);
 
     if(!flux)
     {
@@ -242,7 +243,7 @@ void ErrorHandler(int argc, char ** argv, string & logName, ArgStatus & status, 
         {
             logFind=true;
 
-            InputLogStream flux("../"+tampon,SERVER_URL);
+            InputLogStream flux(tampon,SERVER_URL);
 
             if(!flux.is_open())
             {
