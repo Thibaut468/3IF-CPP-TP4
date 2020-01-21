@@ -83,6 +83,15 @@ InputLogStream & operator >> (InputLogStream & ils, LogElement & le)
 
         //URL
         getline(ils, tampon, ' ');
+
+        //Nettoyage des parametres
+
+        size_t pos = tampon.find('?');
+        if(pos!=string::npos)
+        {
+            tampon.erase(pos);
+        }
+
         le.GetInfos().URL = tampon;
 
         //protocol
@@ -115,10 +124,17 @@ InputLogStream & operator >> (InputLogStream & ils, LogElement & le)
         tampon.erase(0, 1);
         tampon.erase(tampon.length() - 1);
 
-        size_t pos = tampon.find(ils.GetServerUrl());
+        pos = tampon.find(ils.GetServerUrl());
         if (pos != string::npos) {
             tampon.erase(pos, ils.GetServerUrl().length());
         }
+
+        pos = tampon.find('?');
+        if(pos!=string::npos)
+        {
+            tampon.erase(pos);
+        }
+
         le.GetInfos().referer = tampon;
 
         //idNavigateur

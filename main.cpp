@@ -22,6 +22,7 @@ using namespace std;
 #include "LogFilter.h"
 #include "LogTimeFilter.h"
 #include "LogExtensionFilter.h"
+#include "LogUnknownRefFilter.h"
 #include "Stats.h"
 #include "GraphGenerator.h"
 
@@ -90,6 +91,7 @@ int main(int argc, char ** argv)
 
     LogTimeFilter * ltf = nullptr;
     LogExtensionFilter * lef = nullptr;
+    LogUnknownRefFilter * lurf = nullptr;
 
     int cpt(0);
 
@@ -119,6 +121,15 @@ int main(int argc, char ** argv)
 
     //Mise en place des filtres
     vector<LogFilter*> filters;
+
+
+    //Filtre pour éviter les noms inconnus en referer
+    vector<string> unknownRefFilter;
+    unknownRefFilter.emplace_back("-");
+    unknownRefFilter.emplace_back("/");
+    lurf = new LogUnknownRefFilter(unknownRefFilter);
+
+    filters.emplace_back(lurf);
 
     if(optionT)
     {
