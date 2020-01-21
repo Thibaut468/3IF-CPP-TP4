@@ -34,7 +34,9 @@ bool LogUnknownRefFilter::Authorize(LogElement &le) const
 // Algorithme
 //
 {
-    return (find(unknownName.begin(),unknownName.end(),le.GetInfos().referer)==unknownName.end());
+    bool test = find(unknownName.begin(),unknownName.end(),le.GetInfos().referer)==unknownName.end();
+    cout << "Test Unknown sur : "+le.GetInfos().referer+" et résultat : "+to_string(test) << endl;
+    return test;
 } // ---- Fin de Authorize
 
 void LogUnknownRefFilter::AddName(string name)
@@ -90,6 +92,12 @@ LogUnknownRefFilter::LogUnknownRefFilter (vector<string> & name) : LogFilter()
 // Algorithme :
 //
 {
+
+    for(vector<string>::iterator it = name.begin(); it!=name.end(); ++it)
+    {
+        unknownName.emplace_back(*it);
+    }
+
 #ifdef MAP
     cout << "Appel au constructeur de <LogUnknownRefFilter>" << endl;
 #endif

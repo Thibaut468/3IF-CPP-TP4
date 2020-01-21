@@ -157,7 +157,7 @@ int main(int argc, char ** argv)
         cout << "Warning : hits and refs on image, css or javascript extensions have been not taken into account" << endl;
     }
 
-    cout << "Récupération données" << endl;
+    //cout << "Récupération données" << endl;
     //Récupération des données logs et traitement
     while(flux && cpt < LOG_LIMIT)
     {
@@ -194,6 +194,8 @@ int main(int argc, char ** argv)
     {
         cout << cpt << " log-lines have been taken into account after filters." << endl;
     }
+
+    cout<<stats<<endl;
 
     //Affichage du top 10 dans tous les cas
 
