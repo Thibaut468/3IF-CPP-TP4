@@ -48,17 +48,14 @@ void GraphGenerator::Generer(Map_Cibles_Pairs & unMapCibles, string & dotName)
     for(itC = unMapCibles.begin(); itC != unMapCibles.end(); itC++){
         i = j;
         ++j;
-
         itV = find(nodes.begin(), nodes.end(), itC->NameCible);
-        if( itV == nodes.end() ){
+        if( itV == nodes.end()){
             nodes.push_back(itC->NameCible);
             file<<"node"<<i<<" [ label = \""<<itC->NameCible<<"\" ];"<<endl;
-                            file<<"existe pas"<<endl;
         }else{
             tmp = i;
             i = distance(nodes.begin(),itV);
         }
-
         for(itR = itC->Pair.MapReferers.begin(); itR != itC->Pair.MapReferers.end(); itR++ ){
             if(itR->NameRefere == "-"){
                 continue;
@@ -111,7 +108,7 @@ GraphGenerator::GraphGenerator (const GraphGenerator & unGraphGenerateur )
     {
         nodes.emplace_back((*it));
     }
-    
+
 #ifdef MAP
     cout << "Appel au constructeur de copie de <GraphGenerator>" << endl;
 #endif
