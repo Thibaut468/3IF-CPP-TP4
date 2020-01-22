@@ -51,10 +51,9 @@ void GraphGenerator::Generer(Map_Cibles_Pairs & unMapCibles, string & dotName)
         j = i + 1;
         if( itV == nodes.end() ){
             nodes.push_back(itC->NameCible);
-            if(i == 0){
-                file<<"//";
+            if(i != 0){
+                file<<"node"<<i<<" [ label = \""<<itC->NameCible<<"\" ];"<<endl;
             }
-            file<<"node"<<i<<" [ label = \""<<itC->NameCible<<"\" ];"<<endl;
         }
 
         for(itR = itC->Pair.MapReferers.begin(); itR != itC->Pair.MapReferers.end(); itR++ ){
