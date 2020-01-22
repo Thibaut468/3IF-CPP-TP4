@@ -44,13 +44,16 @@ void GraphGenerator::Generer(Map_Cibles_Pairs & unMapCibles, string & dotName)
     int i = 0;  // pour cibles
     int j = 0;  // pour referers
     int tmp = 0;
-
+    cout<< unMapCibles.size()<<endl;
     for(itC = unMapCibles.begin(); itC != unMapCibles.end(); itC++){
         i = j;
         ++j;
         itV = find(nodes.begin(), nodes.end(), itC->NameCible);
-        if( itV == nodes.end()){
+        if( itV == nodes.end() ){
             nodes.push_back(itC->NameCible);
+            if(i == 0){
+                file<<"//";
+            }
             file<<"node"<<i<<" [ label = \""<<itC->NameCible<<"\" ];"<<endl;
         }else{
             tmp = i;
