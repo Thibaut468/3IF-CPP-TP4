@@ -44,7 +44,7 @@ void GraphGenerator::Generer(Map_Cibles_Pairs & unMapCibles, string & dotName)
     int i = 0;  // pour cibles
     int j = 0;  // pour referers
     int tmp = 0;
-    cout<< unMapCibles.size()<<endl;
+
     for(itC = unMapCibles.begin(); itC != unMapCibles.end(); itC++){
         itV = find(nodes.begin(), nodes.end(), itC->NameCible);
         i = distance(nodes.begin(),itV);;
