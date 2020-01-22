@@ -46,35 +46,28 @@ void GraphGenerator::Generer(Map_Cibles_Pairs & unMapCibles, string & dotName)
     int tmp = 0;
     cout<< unMapCibles.size()<<endl;
     for(itC = unMapCibles.begin(); itC != unMapCibles.end(); itC++){
-        i = j;
-        ++j;
         itV = find(nodes.begin(), nodes.end(), itC->NameCible);
+        i = distance(nodes.begin(),itV);;
+        j = i + 1;
         if( itV == nodes.end() ){
             nodes.push_back(itC->NameCible);
             if(i == 0){
                 file<<"//";
             }
             file<<"node"<<i<<" [ label = \""<<itC->NameCible<<"\" ];"<<endl;
-        }else{
-            tmp = i;
-            i = distance(nodes.begin(),itV);
         }
+
         for(itR = itC->Pair.MapReferers.begin(); itR != itC->Pair.MapReferers.end(); itR++ ){
             if(itR->NameRefere == "-"){
                 continue;
             }
             itV = find(nodes.begin(), nodes.end(), itR->NameRefere);
+            j = distance(nodes.begin(),itV);;
             if( itV == nodes.end() ){
                 nodes.push_back(itR->NameRefere);
                 file<<"node"<<j<<" [ label = \""<<itR->NameRefere<<"\" ];"<<endl;
-                file<< "node"<< j << " -> " <<"node"<< i << " [ label = \""<< itR->NbHit <<"\" ];"<<endl;
-                ++j;
-            }else{
-                tmp = j;
-                j = distance(nodes.begin(),itV);
-                file<< "node"<< j << " -> " <<"node"<< i << " [ label = \""<< itR->NbHit <<"\" ];"<<endl;
-                j = tmp;
             }
+            file<< "node"<< j << " -> " <<"node"<< i << " [ label = \""<< itR->NbHit <<"\" ];"<<endl;
         }
         file<<endl;
     }
