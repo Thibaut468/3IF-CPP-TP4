@@ -75,8 +75,16 @@ bool LogExtensionFilter::RemoveExtension(string ext)
 
 LogExtensionFilter& LogExtensionFilter::operator=(const LogExtensionFilter &unLogExtensionFilter)
 // Algorithme :
-// On renvoi l'objet lui meme pour éviter l'affectation d'un filtre.
+// Copie simple de chaque attribut dans le nouvel objet, en évitant le cas lef1=lef1
 {
+    if(this != &unLogExtensionFilter)
+    {
+        extensions.clear();
+        for(vector<string>::const_iterator it=unLogExtensionFilter.extensions.begin(); it!=unLogExtensionFilter.extensions.end(); ++it)
+        {
+            extensions.emplace_back((*it));
+        }
+    }
     return *this;
 } //----- Fin de operator =
 

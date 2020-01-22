@@ -31,7 +31,7 @@ using namespace std;
 //------------------------------------------------- Surcharge d'opérateurs
 LogFilter & LogFilter::operator = ( const LogFilter & unLogFilter )
 // Algorithme :
-// Se renvoi lui même pour éviter l'affectation
+// On renvoi simplement l'objet lui même car aucun attribut à copier
 {
     return *this;
 } //----- Fin de operator =

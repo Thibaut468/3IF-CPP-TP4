@@ -37,12 +37,6 @@ string & InputLogStream::GetServerUrl()
 
 
 //------------------------------------------------- Surcharge d'opérateurs
-InputLogStream & InputLogStream::operator = (const InputLogStream & uniflogstream )
-// Algorithme :
-// Evite l'appel au constructeur de copie. Un flux ne se copiant pas.
-{
-    return *this;
-} //----- Fin de operator =
 
 InputLogStream & operator >> (InputLogStream & ils, LogElement & le)
 //Algorithme
@@ -187,4 +181,11 @@ InputLogStream::InputLogStream (const InputLogStream & uniflogstream )
     cout << "Appel au constructeur de copie de <InputLogStream>" << endl;
 #endif
 } //----- Fin de InputLogStream (constructeur de copie)
+
+InputLogStream & InputLogStream::operator = (const InputLogStream & uniflogstream )
+// Algorithme :
+// On évite l'affectation (passage en protégé)
+{
+    return *this;
+} //----- Fin de operator =
 

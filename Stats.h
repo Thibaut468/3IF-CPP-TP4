@@ -1,5 +1,5 @@
 /*************************************************************************
-                           States  -  description
+                           Stats  -  description
                              -------------------
 début                : 21/01/2020
 copyright            : (C) 2020 par GRAVEY Thibaut & CHEN Gong
@@ -7,8 +7,8 @@ e-mail               : $EMAIL$
 *************************************************************************/
 
 //---------- Interface de la classe <Stats> (fichier Stats.h) ----------------
-#if ! defined ( States_H )
-#define States_H
+#if ! defined ( STATS_H )
+#define STATS_H
 
 //--------------------------------------------------- Interfaces utilisées
 #include "LogElement.h"
@@ -63,9 +63,9 @@ public:
     // Contrat :
     //
 //------------------------------------------------- Surcharge d'opérateurs
-    Stats & operator = ( const Stats & unStates );
+    Stats & operator = ( const Stats & unStats );
     // Mode d'emploi :
-    //Surchage de l'operateur d'affectation pour interdire l'affectation
+    // Surchage de l'operateur d'affectation pour la copie des attributs
     // Contrat :
     //
 
@@ -84,19 +84,19 @@ public:
 //-------------------------------------------- Constructeurs - destructeur
     Stats (const Stats & unStats );
     // Mode d'emploi (constructeur de copie) :
-    //
+    // /
     // Contrat :
     //
 
     Stats ( );
     // Mode d'emploi :
-    //
+    // /
     // Contrat :
     //
 
     virtual ~Stats ( );
     // Mode d'emploi :
-    //
+    // /
     // Contrat :
     //
 
@@ -111,4 +111,4 @@ Map_Cibles_Pairs MapCibles;
 };
 //-------------------------------- Autres définitions dépendantes de <Stats>
 
-#endif // States_H
+#endif // STATS_H

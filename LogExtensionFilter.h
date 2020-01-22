@@ -60,7 +60,7 @@ public:
 //------------------------------------------------- Surcharge d'opérateurs
     LogExtensionFilter & operator = (const LogExtensionFilter & unLogExtensionFilter );
     // Mode d'emploi :
-    // Surcharge de l'opérateur pour rendre nulle son utilisation. On renvoi l'objet en lui même. Un filtre n'affecte pas.
+    // Surcharge de l'opérateur d'affectation copiant les attributs de façon basique
     // Contrat :
     //
 

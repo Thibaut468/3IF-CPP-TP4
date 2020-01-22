@@ -46,7 +46,7 @@ public:
 //------------------------------------------------- Surcharge d'opérateurs
     LogTimeFilter & operator = (const LogTimeFilter & unLogTimeFilter );
     // Mode d'emploi :
-    // Surcharge de l'opérateur pour rendre nulle son utilisation. On renvoi l'objet en lui même. Un filtre ne s'affecte pas.
+    // Surcharge de l'opérateur d'affectation copiant les attributs de façon basique
     // Contrat :
     //
 

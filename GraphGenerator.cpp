@@ -49,29 +49,29 @@ void GraphGenerator::Generer(Map_Cibles_Pairs & unMapCibles, string & dotName)
         i = j;
         ++j;
 
-        itV = find(Nodes.begin(), Nodes.end(), itC->NameCible);
-        if( itV == Nodes.end() ){
-            Nodes.push_back(itC->NameCible);
+        itV = find(nodes.begin(), nodes.end(), itC->NameCible);
+        if( itV == nodes.end() ){
+            nodes.push_back(itC->NameCible);
             file<<"node"<<i<<" [ label = \""<<itC->NameCible<<"\" ];"<<endl;
                             file<<"existe pas"<<endl;
         }else{
             tmp = i;
-            i = distance(Nodes.begin(),itV);
+            i = distance(nodes.begin(),itV);
         }
 
         for(itR = itC->Pair.MapReferers.begin(); itR != itC->Pair.MapReferers.end(); itR++ ){
             if(itR->NameRefere == "-"){
                 continue;
             }
-            itV = find(Nodes.begin(), Nodes.end(), itR->NameRefere);
-            if( itV == Nodes.end() ){
-                Nodes.push_back(itR->NameRefere);
+            itV = find(nodes.begin(), nodes.end(), itR->NameRefere);
+            if( itV == nodes.end() ){
+                nodes.push_back(itR->NameRefere);
                 file<<"node"<<j<<" [ label = \""<<itR->NameRefere<<"\" ];"<<endl;
                 file<< "node"<< j << " -> " <<"node"<< i << " [ label = \""<< itR->NbHit <<"\" ];"<<endl;
                 ++j;
             }else{
                 tmp = j;
-                j = distance(Nodes.begin(),itV);
+                j = distance(nodes.begin(),itV);
                 file<< "node"<< j << " -> " <<"node"<< i << " [ label = \""<< itR->NbHit <<"\" ];"<<endl;
                 j = tmp;
             }
@@ -87,8 +87,16 @@ void GraphGenerator::Generer(Map_Cibles_Pairs & unMapCibles, string & dotName)
 //------------------------------------------------- Surcharge d'opérateurs
 GraphGenerator & GraphGenerator::operator=(const GraphGenerator &unGraphGenerateur)
 // Algorithme :
-//
+// Copie simple de chaque attribut dans le nouvel objet, en évitant le cas gg1=gg1
 {
+    if(this!=&unGraphGenerateur)
+    {
+        nodes.clear();
+        for(vector<string>::const_iterator it=unGraphGenerateur.nodes.begin(); it!=unGraphGenerateur.nodes.end(); ++it)
+        {
+            nodes.emplace_back((*it));
+        }
+    }
     return *this;
 } //----- Fin de operator =
 
@@ -98,6 +106,12 @@ GraphGenerator::GraphGenerator (const GraphGenerator & unGraphGenerateur )
 // Algorithme :
 //
 {
+
+    for(vector<string>::const_iterator it=unGraphGenerateur.nodes.begin(); it!=unGraphGenerateur.nodes.end(); ++it)
+    {
+        nodes.emplace_back((*it));
+    }
+    
 #ifdef MAP
     cout << "Appel au constructeur de copie de <GraphGenerator>" << endl;
 #endif

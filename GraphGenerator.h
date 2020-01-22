@@ -40,26 +40,26 @@ public:
 //------------------------------------------------- Surcharge d'opérateurs
     GraphGenerator & operator = ( const GraphGenerator & unGraphGenerateur );
     // Mode d'emploi :
-    // Surchage de l'operateur d'affectation pour interdire l'affectation
+    // Surchage de l'operateur basique de copie d'attributs
     // Contrat :
     //
 
 //-------------------------------------------- Constructeurs - destructeur
     GraphGenerator (const GraphGenerator & unGraphGenerateur );
     // Mode d'emploi (constructeur de copie) :
-    //
+    // /
     // Contrat :
     //
 
     GraphGenerator ( );
     // Mode d'emploi :
-    //
+    // /
     // Contrat :
     //
 
     virtual ~GraphGenerator ( );
     // Mode d'emploi :
-    //
+    // /
     // Contrat :
     //
 
@@ -69,7 +69,7 @@ protected:
 //----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés
-vector<string> Nodes;
+vector<string> nodes;
 };
 
 //-------------------------------- Autres définitions dépendantes de <GraphGenerator>

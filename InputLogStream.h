@@ -50,11 +50,6 @@ public:
 
 
 //------------------------------------------------- Surcharge d'opérateurs
-    InputLogStream & operator = (const InputLogStream & uniflogstream );
-    // Mode d'emploi :
-    // Surcharge de l'opérateur = implémenté de façon à le désactiver. Un flux ne se copie pas.
-    // Contrat :
-    //
 
     friend InputLogStream & operator >> (InputLogStream & ils, LogElement & le);
     // Mode d'emploi :
@@ -85,6 +80,12 @@ protected:
     InputLogStream (const InputLogStream & uniflogstream );
     // Mode d'emploi (constructeur de copie) :
     // Non utilisable
+    // Contrat :
+    //
+
+    InputLogStream & operator = (const InputLogStream & uniflogstream );
+    // Mode d'emploi :
+    // Surcharge de l'opérateur = implémenté en protégé de façon à le désactiver. Un flux ne se copie pas.
     // Contrat :
     //
 

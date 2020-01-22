@@ -1,5 +1,5 @@
 /*************************************************************************
-                           States  -  description
+                           Stats  -  description
                              -------------------
 début                : 21/01/2020
 copyright            : (C) 2020 par GRAVEY Thibaut & CHEN Gong
@@ -75,10 +75,15 @@ void Stats::AffichageTop10()
 }
 
 //------------------------------------------------- Surcharge d'opérateurs
-Stats & Stats::operator = ( const Stats & unStates )
+Stats & Stats::operator = ( const Stats & unStats )
 // Algorithme :
-//
+// Utilisation de l'opérateur d'affectation de la map de STL. Fourni une copie.
 {
+    if(this!=&unStats)
+    {
+        MapCibles.clear();
+        MapCibles = unStats.MapCibles;
+    }
     return *this;
 } //----- Fin de operator =
 
@@ -109,10 +114,12 @@ Map_Cibles_Pairs & Stats::GetMapCibles(){
 }
 
 //-------------------------------------------- Constructeurs - destructeur
-Stats::Stats (const Stats & unStates )
+Stats::Stats (const Stats & unStats )
 // Algorithme :
-//
+// Utilisation de l'opérateur d'affectation de la map STL (fait bien une copie)
 {
+
+    MapCibles=unStats.MapCibles;
 #ifdef MAP
     cout << "Appel au constructeur de copie de <Stats>" << endl;
 #endif

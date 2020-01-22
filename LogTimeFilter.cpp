@@ -39,8 +39,13 @@ bool LogTimeFilter::Authorize(LogElement &le) const
 //------------------------------------------------- Surcharge d'opérateurs
 LogTimeFilter & LogTimeFilter::operator = ( const LogTimeFilter & unLogTimeFilter )
 // Algorithme :
-// On renvoi l'objet lui meme pour éviter l'affectation d'un filtre.
+// Copie simple de chaque attribut dans le nouvel objet, en évitant le cas ltf1=ltf1
 {
+    if(this!=&unLogTimeFilter)
+    {
+        time = unLogTimeFilter.time;
+        interval = unLogTimeFilter.interval;
+    }
     return *this;
 } //----- Fin de operator =
 

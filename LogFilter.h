@@ -47,7 +47,7 @@ public:
 //------------------------------------------------- Surcharge d'opérateurs
     virtual LogFilter & operator = ( const LogFilter & unLogFilter );
     // Mode d'emploi :
-    // Surcharger pour éviter son utilisation. On ne souhaite pas qu'un filtre s'affecte.
+    // Surcharge de l'opérateur basique. Aucun attribut n'est à copier.
     // Contrat :
     //
 
