@@ -1,5 +1,5 @@
 /*************************************************************************
-                           GraphGenerateur  -  description
+   GraphGenerateur  -  Générateur de fichier .dot au format GraphViz
                              -------------------
     début                : 21/01/2020
     copyright            : (C) 2020 par GRAVEY Thibaut & CHEN Gong
@@ -30,9 +30,9 @@ using namespace std;
 //} //----- Fin de Méthode
 
 void GraphGenerator::Generer(Map_Cibles_Pairs & unMapCibles, string & dotName)
-// Algorithme : pour eviter de creer plusieur fois le meme noeud, on utilise un if-else et un tempon d'int pour
-// retrouver le nom du noeud(soit un cible soit un referer).
-// le int i, et int j ici sont pour nommer les noeuds
+// Algorithme : pour eviter de creer plusieur fois le meme noeud, on utilise un if-else et un tampon d'entier pour
+// retrouver le nom du noeud (soit une cible, soit un referer).
+// le int i, et int j ici sont pour nommer les différents noeuds.
 {
     ofstream file;
     file.open(dotName, ios::out | ios::trunc );
@@ -96,7 +96,7 @@ GraphGenerator & GraphGenerator::operator=(const GraphGenerator &unGraphGenerate
 //-------------------------------------------- Constructeurs - destructeur
 GraphGenerator::GraphGenerator (const GraphGenerator & unGraphGenerateur )
 // Algorithme :
-//
+// Simple copie de chacune des valeurs. Parcours via un itérateur.
 {
 
     for(vector<string>::const_iterator it=unGraphGenerateur.nodes.begin(); it!=unGraphGenerateur.nodes.end(); ++it)
@@ -112,7 +112,7 @@ GraphGenerator::GraphGenerator (const GraphGenerator & unGraphGenerateur )
 
 GraphGenerator::GraphGenerator ( )
 // Algorithme :
-//
+// /
 {
 #ifdef MAP
     cout << "Appel au constructeur de <GraphGenerator>" << endl;
@@ -121,7 +121,7 @@ GraphGenerator::GraphGenerator ( )
 
 GraphGenerator::~GraphGenerator ( )
 // Algorithme :
-//
+// /
 {
 #ifdef MAP
     cout << "Appel au destructeur de <GraphGenerator>" << endl;

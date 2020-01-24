@@ -1,5 +1,5 @@
 /*************************************************************************
-                           Stats  -  description
+      Stats  -  Classe gérant les statistiques de l'analyse de logs apache
                              -------------------
 début                : 21/01/2020
 copyright            : (C) 2020 par GRAVEY Thibaut & CHEN Gong
@@ -38,8 +38,10 @@ typedef vector<string> CiblesTop10;
 
 //------------------------------------------------------------------------
 // Rôle de la classe <Stats>
-//
-//
+// Cette classe contient notre structure de données principale et permet
+// le stockage des différentes informations récupérés via l'analyse d'un fichier de
+// logs apache. On peut ainsi en ressortir le classement des 10 cibles les plus consultées.
+// Cette classe prépare aussi les données à la création d'un graphique sous le format GraphViz
 //------------------------------------------------------------------------
 
 class Stats
@@ -54,14 +56,15 @@ public:
     // Contrat :
     //
     void AjouterInfo (Informations & info);
-    // Mode d'emploi : Pour ajouter une information dans cette classe Stats
+    // Mode d'emploi :
+    // Ajouter une information entre cible et référent selon l'information contenu dans un élément de Log
     // Contrat :
     //
     void AffichageTop10();
-    // Mode d'emploi : Affichage de top 10 cibles les plus consultees.
-    //
+    // Mode d'emploi :
+    // Affichage des 10 cibles les plus consultees sur les données entrés dans l'instance via AjouterInfo
     // Contrat :
-    //
+    // Avoir rempli l'instance avec les données souhaités au préalable
 //------------------------------------------------- Surcharge d'opérateurs
     Stats & operator = ( const Stats & unStats );
     // Mode d'emploi :
@@ -71,13 +74,13 @@ public:
 
     friend ostream & operator << (ostream & os, Stats & unStats);
     // Mode d'emploi :
-    // pour afficher directement dans main
+    // Surcharge de l'opérateur << pour faciliter l'affichage sur un ostream
     // Contrat :
     //
 
     Map_Cibles_Pairs & GetMapCibles();
     // Mode d'emploi :
-    //
+    // Getter.
     // Contrat :
     //
 

@@ -1,5 +1,5 @@
 /*************************************************************************
-                           Stats  -  description
+   Stats  -  Classe gérant les statistiques de l'analyse de logs apache
                              -------------------
 début                : 21/01/2020
 copyright            : (C) 2020 par GRAVEY Thibaut & CHEN Gong
@@ -29,7 +29,7 @@ using namespace std;
 
 void Stats::AjouterInfo (Informations & info)
 // Algorithme : Utilisation de deux maps et une paire comme une structure de donnees
-// pour stock les cibles et les referers et les nombres de hits correspondants.
+// pour stock les cibles et les referers et le nombres de hits correspondants.
 {
     MapCibles[info.URL].MapReferers[info.referer]++;
     MapCibles[info.URL].NbHitTotal++;
@@ -39,8 +39,8 @@ void Stats::AjouterInfo (Informations & info)
 void Stats::AffichageTop10()
 // Algorithme : on cherche le NbHitTotal max dans le map MapCibles,
 //  on l'enregistre dans un tableau, ensuite on remplace le NbHitTotal par 0,
-// a la fin de l'execution, on remet les valeurs  de NbHitTotal
-// but: eviter de verifier chaque fois si l'element existe deja dans myTop10
+//  a la fin de l'execution, on remet les valeurs  de NbHitTotal
+//  but: eviter de verifier chaque fois si l'element existe deja dans myTop10 (complexité)
 {
     CiblesTop10 myTop10(10);
     Map_Cibles_Pairs::iterator it;
@@ -88,8 +88,8 @@ Stats & Stats::operator = ( const Stats & unStats )
 } //----- Fin de operator =
 
 ostream & operator << (ostream & os, Stats & unStats)
-// Algorithme : Surcharge de << pour faciliter l'affichage dans main
-//
+// Algorithme :
+// Utilisation de l'opérateur << de l'ostream en utilisant des iterateurs pour parcourir notre structure
 {
     Map_Cibles_Pairs::iterator IterCibles;
     Map_Referers_NbHit::iterator IterReferers;

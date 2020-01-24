@@ -77,7 +77,15 @@ void ErrorHandler(int argc, char ** argv,string & logName, ArgStatus & status, b
 
 int main(int argc, char ** argv)
 // Algorithme :
+// Chef d'orchestre de l'application, cette fonction est son point d'entrée et c'est elle qui coordonne l'exécution
+// de l'outil analogue. Dans un premier temps, on vient verifier chaque cas d'erreur possible pour la traiter au
+// plus vite et rejeter le lancement de l'outil si son appel à été mal exécuter. Par la même occasion, on récupère
+// la commande en entrée et on traite ses différents paramètres. Ensuite on génère les différents filtres
+// en fonction des options récupérés et on les mets en place pour l'analyse de logs. Puis on analyse l'entièreté du fichier
+// et l'on envoi dans les stats les informations qui répondent à tout les critères. Enfin, on lance la génération du
+// classement et du fichier .dot au format GraphViz si besoin.
 //
+// Le main se charge aussi de l'affichage sur la sortie d'erreur des messages correspondants.
 {
     //Mise en place des variables
     ArgStatus applicationStatus = ArgStatus::SUCCESS;
@@ -213,7 +221,12 @@ int main(int argc, char ** argv)
 
 void ErrorHandler(int argc, char ** argv, string & logName, ArgStatus & status, bool & optionG, bool & optionE, bool & optionT, int & timeFilter, string & dotName)
 // Algorithme
-//
+// Cette fonction est très importante car c'est elle qui régénère la commande d'entrée grâce à argc et argv et vérifie
+// par la même occasion chaque erreur possible. On vient donc recréer la commande initiale que l'on stock dans un
+// buffer de type string pour ensuite analyser chacun de ces paramètres, les mettre en place pour l'exécution et
+// vérifier que la syntaxe correspond. On vérifie de même les ouvertures de fichiers etc. Si il y a un problème,
+// on positionne le statut des arguments en erreur et l'on retourne dans le main pour afficher l'erreur et fermer
+// l'application.
 {
     bool logFind(false);
 
