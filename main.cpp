@@ -62,7 +62,7 @@ static string SERVER_URL = "http://intranet-if.insa-lyon.fr";
 
 static int TIME_INTERVAL(1);
 
-static int LOG_LIMIT = 100000;
+static int LOG_LIMIT = 1000000;
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Fonctions publiques
@@ -180,7 +180,7 @@ int main(int argc, char ** argv)
 
             if(valid)
             {
-                //cout << le << endl;
+                cout << le << endl;
                 stats.AjouterInfo(le.GetInfos());
                 cpt++;
             }

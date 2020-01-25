@@ -37,14 +37,17 @@ bool LogExtensionFilter::Authorize(LogElement &le) const
     bool cible(true);
     bool ref(true);
 
-    if(le.GetInfos().URL.find_last_of('.') != string::npos) //Il y a une extension sur la cible
+    for(vector<string>::const_iterator it=extensions.begin(); it!=extensions.end(); ++it)
     {
-        cible = find(extensions.begin(),extensions.end(),le.GetInfos().URL.substr(le.GetInfos().URL.find_last_of('.')))==extensions.end();
-    }
+        if(cible && le.GetInfos().URL.find(*it) != string::npos)
+        {
+            cible=false;
+        }
 
-    if(le.GetInfos().URL.find_last_of('.') != string::npos) //Il y a une extension sur la ref
-    {
-        ref = find(extensions.begin(),extensions.end(),le.GetInfos().referer.substr(le.GetInfos().URL.find_last_of('.')))==extensions.end();
+        if(ref && le.GetInfos().referer.find(*it) != string::npos)
+        {
+            ref=false;
+        }
     }
 
     return (cible && ref);
