@@ -180,7 +180,7 @@ int main(int argc, char ** argv)
 
             if(valid)
             {
-                cout << le << endl;
+                //cout << le << endl;
                 stats.AjouterInfo(le.GetInfos());
                 cpt++;
             }
